@@ -1,0 +1,16 @@
+[
+    {
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "cedula": "12345678",
+        "rut": "12345678-9",
+        "correo": "juan.perez@example.com"
+    },
+    {
+        "nombre": "María",
+        "apellido": "López",
+        "cedula": "87654321",
+        "rut": "87654321-0",
+        "correo": "maria.lopez@example.com"
+    }
+]
