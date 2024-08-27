@@ -11,6 +11,7 @@ div {
     background-color: #f8f8f84d;
     width: 400px;
     margin-bottom: 50px;
+
 }
 
 form {
@@ -19,7 +20,7 @@ form {
     align-items: center;
     justify-content: center;
     margin-top: 20px;
-    
+
 }
 
 input {
@@ -86,13 +87,13 @@ body {
     justify-content: center;
     background-repeat: repeat;
     background-size: cover;
-    background-image: url(../docs/hojassinviento.jpg);
-    
+    background-color: #f4f4f4;
+
 }
 
 span {
     color: rgb(255, 0, 0);
-    
+
 }
 
 .botonlindo {
@@ -113,20 +114,20 @@ span {
     -webkit-user-select: none;
     touch-action: manipulation;
     margin-bottom: 85px;
-  }
-  
-  .botonlindo:hover {
+}
+
+.botonlindo:hover {
     background-color: #fff;
-  }
-  
-  .botonlindo:active {
+}
+
+.botonlindo:active {
     box-shadow: #422800 2px 2px 0 0;
     transform: translate(2px, 2px);
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     .botonlindo {
-      min-width: 120px;
-      padding: 0 25px;
+        min-width: 120px;
+        padding: 0 25px;
     }
-  }
+}
