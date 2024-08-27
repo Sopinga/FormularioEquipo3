@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cardContainer = document.getElementById("card-container");
 
     // Cargar datos desde el archivo JSON
-    fetch('data.json')
+    fetch("http://localhost:3000/personas")
         .then(response => response.json())
         .then(data => {
             data.forEach(persona => {
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <h2>${persona.nombre} ${persona.apellido}</h2>
                     <p><strong>Cédula:</strong> ${persona.cedula}</p>
                     <p><strong>RUT:</strong> ${persona.rut}</p>
-                    <p><strong>Correo:</strong> ${persona.correo}</p>
+                    <p><strong>Correo:</strong> ${persona.email}</p>
                 `;
 
                 // Agregar la tarjeta al contenedor principal

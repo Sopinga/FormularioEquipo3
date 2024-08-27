@@ -1,4 +1,4 @@
-document.getElementById('validateBtn').addEventListener('click', function () {
+document.getElementById('validateBtn').addEventListener('click', async function () {
     const nombre = document.getElementById('nombre');
     const apellido = document.getElementById('apellido');
     const password = document.getElementById('password');
@@ -93,12 +93,31 @@ document.getElementById('validateBtn').addEventListener('click', function () {
     }
 
     if (isValid) {
+        const nuevaPersona = {
+            nombre: nombre.value,
+            apellido: apellido.value,
+            email: email.value,
+            cedula: cedula.value,
+            rut: rut.value,
+        };
+        const responseAlta = await fetch("http://localhost:3000/personas", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevaPersona),
+
+        });
+
+        if (responseAlta.ok) {
+            window.location.href = '../cards/datos.html'
+        }
         alert('Todos los campos son válidos.');
     }
 });
 
 function validarCedulaUruguaya(cedula) {
-    
+
     // Eliminar puntos y guiones
     cedula = cedula.replace(/\./g, '').replace(/-/g, '');
 
