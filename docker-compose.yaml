@@ -1,7 +1,8 @@
-name: formulario
+version: '27.2.0'
+
 services:
- backend:
-    image: backend:production
+  backend:
+    image: backend:latest
     container_name: backend
     build:
       context: ./backend
