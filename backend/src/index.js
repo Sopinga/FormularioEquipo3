@@ -1,35 +1,22 @@
 // index.js
 const fastify = require('fastify')({ logger: true })
-const fs = require('fs')
-const path = require('path')
 
-// Definir una ruta GET para probar el servidor
+// Ruta de prueba para ver si el servidor está funcionando
 fastify.get('/', async (request, reply) => {
-    return { hello: 'world' }
+    return { message: 'Servidor funcionando correctamente' }
 })
 
-// Definir una ruta POST para recibir la información de 'persona'
+// Ruta POST para recibir datos de persona
 fastify.post('/persona', async (request, reply) => {
-    const persona = request.body
+    try {
+        const persona = request.body
 
-    // Guardar la información en un archivo JSON
-    const filePath = path.join(__dirname, 'data', 'personas.json')
-
-    // Leer el archivo existente
-    let personas = []
-    if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath)
-        personas = JSON.parse(data)
+        // Simula el almacenamiento de datos, por ahora solo responde con un mensaje
+        reply.send({ status: 'success', message: 'Persona recibida', persona })
+    } catch (err) {
+        fastify.log.error(err)
+        reply.status(500).send({ status: 'error', message: 'Algo salió mal' })
     }
-
-    // Añadir la nueva persona
-    personas.push(persona)
-
-    // Guardar los datos actualizados en el archivo
-    fs.writeFileSync(filePath, JSON.stringify(personas, null, 2))
-
-    // Responder con un mensaje de éxito
-    reply.send({ status: 'success', message: 'Persona guardada exitosamente' })
 })
 
 // Correr el servidor
