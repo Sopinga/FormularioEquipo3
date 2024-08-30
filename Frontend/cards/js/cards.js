@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cardContainer = document.getElementById("card-container");
 
     // Cargar datos desde el archivo JSON
-    fetch("http://localhost:3000/personas")
+    fetch("http://localhost:3000/api/personas")
         .then(response => response.json())
         .then(data => {
             data.forEach(persona => {

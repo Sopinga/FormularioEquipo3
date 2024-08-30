@@ -99,8 +99,9 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             email: email.value,
             cedula: cedula.value,
             rut: rut.value,
+            password: password.value,
         };
-        const responseAlta = await fetch("http://localhost:3000/personas", {
+        const responseAlta = await fetch("http://localhost:3000/api/personas", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
