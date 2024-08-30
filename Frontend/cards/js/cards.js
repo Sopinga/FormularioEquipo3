@@ -1,26 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const cardContainer = document.getElementById("card-container");
+async function obtenerPersonas() {
+    try {
+        const response = await fetch('http://localhost:3000/api/personas', {
+            method: 'GET', // El método es GET por defecto, así que es opcional incluirlo
+            headers: {
+                'Content-Type': 'application/json' // Especifica el tipo de contenido
+            }
+        });
 
-    // Cargar datos desde el archivo JSON
-    fetch("http://localhost:3000/api/personas")
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(persona => {
-                // Crear el contenedor de la tarjeta
-                const card = document.createElement('div');
-                card.classList.add('card');
+        // Verifica si la solicitud fue exitosa
+        if (!response.ok) {
+            throw new Error('Error al obtener las personas');
+        }
 
-                // Contenido de la tarjeta
-                card.innerHTML = `
-                    <h2>${persona.nombre} ${persona.apellido}</h2>
-                    <p><strong>Cédula:</strong> ${persona.cedula}</p>
-                    <p><strong>RUT:</strong> ${persona.rut}</p>
-                    <p><strong>Correo:</strong> ${persona.email}</p>
-                `;
+        const data = await response.json();
+        console.log('Personas obtenidas del servidor:', data);
 
-                // Agregar la tarjeta al contenedor principal
-                cardContainer.appendChild(card);
-            });
-        })
-        .catch(error => console.error('Error al cargar los datos:', error));
-});
+        // Aquí puedes hacer algo con los datos obtenidos, como mostrarlos en el HTML
+        mostrarPersonas(data);
+
+    } catch (error) {
+        console.error('Error al realizar la solicitud GET:', error);
+    }
+}
+
+// Función para mostrar las personas en el HTML (opcional)
+function mostrarPersonas(personas) {
+    const listaPersonas = document.getElementById('listaPersonas');
+    listaPersonas.innerHTML = ''; // Limpiamos la lista antes de llenarla de nuevo
+
+    personas.forEach(persona => {
+        const li = document.createElement('li');
+        li.textContent = `${persona.nombre}, ${persona.edad} años`;
+        listaPersonas.appendChild(li);
+    });
+}
+
+// Llamar a la función obtenerPersonas al cargar la página
+document.addEventListener('DOMContentLoaded', obtenerPersonas);
