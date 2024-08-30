@@ -101,7 +101,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             rut: rut.value,
             password: password.value,
         };
-        const responseAlta = await fetch("http://localhost:3000/api/personas", {
+        const respuesta = await fetch('/api/form', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -109,8 +109,10 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             body: JSON.stringify(nuevaPersona),
 
         });
+        const resultado = await respuesta.json();
+        alert(resultado.message);
 
-        if (responseAlta.ok) {
+        if (respuesta.ok) {
             window.location.href = '../cards/datos.html'
         }
         alert('Todos los campos son válidos.');
