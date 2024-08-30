@@ -1,13 +1,12 @@
-version: '27.2.0'
+version: '3.8'
 
 services:
   backend:
-    image: backend:latest
-    container_name: backend
     build:
       context: ./backend
-    command: sh -c "npm install;npm run dev"
+    container_name: backend-fastify
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
       - ./backend:/backend
+    command: sh -c "npm install && npm run dev"

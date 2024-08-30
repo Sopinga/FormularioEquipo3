@@ -1,29 +1,45 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+// index.js
+const fastify = require('fastify')({ logger: true })
+const fs = require('fs')
+const path = require('path')
 
-app.use(express.json()); // Middleware para parsear JSON
+// Definir una ruta GET para probar el servidor
+fastify.get('/', async (request, reply) => {
+    return { hello: 'world' }
+})
 
-// Simulamos una base de datos en memoria
-let personas = [];
+// Definir una ruta POST para recibir la información de 'persona'
+fastify.post('/persona', async (request, reply) => {
+    const persona = request.body
 
-// Ruta para recibir y guardar el objeto Persona
-app.post('/api/personas', (req, res) => {
-    const persona = req.body;
+    // Guardar la información en un archivo JSON
+    const filePath = path.join(__dirname, 'data', 'personas.json')
 
-    if (!persona.nombre || !persona.edad) {
-        return res.status(400).json({ error: 'Nombre y edad son requeridos' });
+    // Leer el archivo existente
+    let personas = []
+    if (fs.existsSync(filePath)) {
+        const data = fs.readFileSync(filePath)
+        personas = JSON.parse(data)
     }
 
-    personas.push(persona);
-    res.status(201).json({ mensaje: 'Persona guardada exitosamente', persona });
-});
+    // Añadir la nueva persona
+    personas.push(persona)
 
-// Ruta para obtener todas las personas
-app.get('/api/personas', (req, res) => {
-    res.json(personas);
-});
+    // Guardar los datos actualizados en el archivo
+    fs.writeFileSync(filePath, JSON.stringify(personas, null, 2))
 
-app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
-});
+    // Responder con un mensaje de éxito
+    reply.send({ status: 'success', message: 'Persona guardada exitosamente' })
+})
+
+// Correr el servidor
+const start = async () => {
+    try {
+        await fastify.listen({ port: 3000, host: '0.0.0.0' })
+        fastify.log.info(`Server listening on ${fastify.server.address().port}`)
+    } catch (err) {
+        fastify.log.error(err)
+        process.exit(1)
+    }
+}
+start()
