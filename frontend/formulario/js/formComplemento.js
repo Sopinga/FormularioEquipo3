@@ -102,7 +102,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             password: password.value,
         };
 
-        const response = await fetch('http://localhost:3000/form', {
+        const response = await fetch('http://localhost:3000/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
