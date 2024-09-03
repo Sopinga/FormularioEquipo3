@@ -1,4 +1,4 @@
-name: caso2
+name: Persona
 services:
   backend:
     image: backend:production
@@ -10,3 +10,12 @@ services:
       - 3000:3000
     volumes:
       - ./backend:/backend
+  frontend:
+    image: nginx:alpine
+    ports:
+      - 80:80 
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend:/usr/share/nginx/html      
+
+ 
