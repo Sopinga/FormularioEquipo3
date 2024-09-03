@@ -22,12 +22,12 @@ export const PersonaPostSchema = Type.Object({
   // Se agrega el id
   id: Type.Number(),
 
-  contraseña: Type.String({
+  contrasena: Type.String({
     minLength: 8,
     maxLength: 20,
     pattern: passwordRegex.source,
   }),
-  repetirContraseña: Type.String({
+  repetirContrasena: Type.String({
     minLength: 8,
     maxLength: 20,
     pattern: passwordRegex.source,
