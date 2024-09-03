@@ -8,3 +8,6 @@ create table if not exists people(
     rut bigint not null unique,
     contrasena text not null,
 )
+
+instert into poeple (nombre, apellido, email, cedula, rut, contrasena)
+    values("pepito","rodriguez","roberto@hotmail.com","5.440.395-7",214849650014, crypt(Juancito!8442, gen_salt("bf")));
