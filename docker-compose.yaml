@@ -16,3 +16,14 @@ services:
       - 80:80
     volumes:
       - ./frontend:/usr/share/nginx/html
+    
+  database:
+    image: db
+    container_name: database
+    build: ./database
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=personas
