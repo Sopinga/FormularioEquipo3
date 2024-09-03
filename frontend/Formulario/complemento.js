@@ -65,7 +65,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         isValid = false;
     }
 
-    const cedulaPattern = const cedulaRegex = /^[1-9]{1}\.[0-9]{3}\.[0-9]{3}-[0-9]{1}$/;;
+    const cedulaPattern = /^[1-9]{1}\.[0-9]{3}\.[0-9]{3}-[0-9]{1}$/;
     if (cedula.value.trim() === '') {
         cedulaError.textContent = 'La cédula es obligatoria.';
         cedulaError.style.display = 'block';
