@@ -1,4 +1,5 @@
-create table people(
+create extension if not exists pgcrypto
+create table if not exists people(
     id_persona serial primary key,
     nombre text not null,
     apellido text not null,
