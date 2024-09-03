@@ -99,23 +99,20 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             email: email.value,
             cedula: cedula.value,
             rut: rut.value,
-            password: password.value,
         };
-
-        const response = await fetch('http://localhost:3000/', {
-            method: 'POST',
+        const responseAlta = await fetch("http://localhost:3000/personas", {
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nuevaPersona })
+            body: JSON.stringify(nuevaPersona),
+
         });
 
-        const result = await response.json();
-        if (result.status === 'success') {
-            alert('Datos enviados correctamente');
-        } else {
-            alert('Error al enviar los datos');
+        if (responseAlta.ok) {
+            window.location.href = '../cards/datos.html'
         }
+        alert('Todos los campos son válidos.');
     }
 });
 

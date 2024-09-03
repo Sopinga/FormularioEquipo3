@@ -13,9 +13,6 @@ services:
   frontend:
     image: nginx:alpine
     ports:
-      - 80:80 
+      - 80:80
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./frontend:/usr/share/nginx/html      
-
- 
+      - ./frontend:/usr/share/nginx/html
