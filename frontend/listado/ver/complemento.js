@@ -12,11 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             if (response.ok) {
                 const persona = await response.json();
-                document.getElementById('nombre').innerText = persona.nombre;
-                document.getElementById('apellido').innerText = persona.apellido;
-                document.getElementById('email').innerText = persona.email;
-                document.getElementById('cedula').innerText = persona.cedula;
-                document.getElementById('rut').innerText = persona.rut;
                 // Crear el contenedor de la tarjeta
                 const card = document.createElement('div');
                 card.classList.add('card');
