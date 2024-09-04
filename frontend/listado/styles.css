@@ -1,6 +1,6 @@
 body {
     font-family: 'Georgia', serif;
-    background-color: #000;
+    background-color: #ffffff;
     margin: 0;
     padding: 30px;
     text-align: left;
@@ -8,7 +8,7 @@ body {
 }
 
 h1 {
-    color: #61a7ec;
+    color: #2c3e50;
     margin-bottom: 30px;
     font-size: 2.5em;
     text-transform: uppercase;
@@ -18,25 +18,19 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    margin-top: 30px;
-    
 }
 
 .card {
-    width: 240px;
-    height: 254px;
-    border-radius: 20px;
-    background: #f5f5f5;
-    position: relative;
-    padding: 1.8rem;
-    border: 2px solid #c3c6ce;
-    transition: 0.5s ease-out;
-    overflow: visible;
+    background-color: #fef9f9;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    transition: transform 0.3s;
 }
 
 .card:hover {
-    border-color: #008bf8;
- box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+    transform: translateY(-5px);
 }
 
 .card h2 {
@@ -55,45 +49,3 @@ h1 {
     color: #333;
     font-weight: bold;
 }
-
-.btnEliminar {
-    transform: translate(-50%, 125%);
-    width: 30%;
-    border-radius: 1rem;
-    border: none;
-    background-color: #ec1e1e;
-    color: #fff;
-    font-size: 1rem;
-    padding: .5rem 1rem;
-    position: absolute;
-    left: 30%;
-    bottom: 0;
-    opacity: 0;
-    transition: 0.3s ease-out;
-}
-
-.btnEditar {
-    transform: translate(-50%, 125%);
-    width: 30%;
-    border-radius: 1rem;
-    border: none;
-    background-color: #008bf8;
-    color: #fff;
-    font-size: 1rem;
-    padding: .5rem 1rem;
-    position: absolute;
-    left: 70%;
-    bottom: 0;
-    opacity: 0;
-    transition: 0.3s ease-out;
-}
-
-.card:hover .btnEditar {
-    transform: translate(-50%, 50%);
-    opacity: 1;
-   }
-
-.card:hover .btnEliminar {
-    transform: translate(-50%, 50%);
-    opacity: 1;
-    }
