@@ -29,7 +29,7 @@ const personaRoute: FastifyPluginAsync = async (
   fastify: FastifyInstance,
   opts: FastifyPluginOptions
 ): Promise<void> => {
-  // Ruta para obtener todas las personas
+  // Ruta para tener todas las personas
   fastify.get("/", {
     handler: async function (request, reply) {
       if (personas.length === 0) {
