@@ -65,14 +65,10 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         isValid = false;
     }
 
-    const cedulaPattern = /^[1-9]{1}\.[0-9]{3}\.[0-9]{3}-[0-9]{1}$/;
+    const cedulaPattern = /^\d{7,10}$/;
     if (cedula.value.trim() === '') {
         cedulaError.textContent = 'La cédula es obligatoria.';
         cedulaError.style.display = 'block';
-        isValid = false;
-    } else if (!cedulaPattern.test(rut.value)) {
-        rutError.textContent = 'La cedula debe tener 8 digitos.';
-        rutError.style.display = 'block';
         isValid = false;
     } else if (!validarCedulaUruguaya(cedula.value)) {
         cedulaError.textContent = 'La cédula es incorrecta, intenta de nuevo.';
@@ -98,12 +94,10 @@ document.getElementById('validateBtn').addEventListener('click', async function 
 
     if (isValid) {
         const nuevaPersona = {
-            contrasena: password.value,
-            repetirContrasena: confirmPassword.value,
-            cedula: cedula.value,
             nombre: nombre.value,
             apellido: apellido.value,
             email: email.value,
+            cedula: cedula.value,
             rut: rut.value,
         };
         const responseAlta = await fetch("http://localhost:3000/personas", {
@@ -116,7 +110,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         });
 
         if (responseAlta.ok) {
-            window.location.href = '../../index.html'
+            window.location.href = '../cards/datos.html'
         }
         alert('Todos los campos son válidos.');
     }

@@ -16,7 +16,7 @@ services:
       - 80:80
     volumes:
       - ./frontend:/usr/share/nginx/html
-    
+
   database:
     image: db
     container_name: database
