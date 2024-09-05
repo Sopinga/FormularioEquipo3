@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cardContainer = document.getElementById("card-container");
     const searchPersona = document.getElementById("searchPerson")
     const URL = 'http://localhost:3000/personas';
-    async function fetchPersonData() {
+    async function PersonData() {
         try {
             const response = await fetch(`${URL}/${searchPersona}`, {
                 method: 'GET',
