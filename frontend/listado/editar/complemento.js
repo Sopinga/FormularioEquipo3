@@ -1,20 +1,16 @@
 import { obtenerParams } from "../borrar/complemento";
 
-const idPersona = obtenerParams('id');
-
 const URL = 'http://localhost:3000'
 
-class Persona {
-    persona(nombre, apellido, email, cedula, rut, contrasena){
-        this.id = personaId;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.cedula = cedula;
-        this.rut = rut;
-        this.contrasena = contrasena;
-    }
-}
+const Persona = {
+    contrasena: password.value,
+    repetirContrasena: confirmPassword.value,
+    cedula: cedula.value,
+    nombre: nombre.value,
+    apellido: apellido.value,
+    email: email.value,
+    rut: rut.value,
+};
 
 const person = new Persona(
     document.getElementById('nombre').value,
@@ -25,7 +21,7 @@ const person = new Persona(
     document.getElementById('contrasena').value
 );
 
-const response = await fetch(`${URL}/${searchPersona}`,{
+const response = await fetch(`${URL}/${searchPersona}`, {
     method: 'PUT',
-    headers: {'Content-Type':'applications/json',},
+    headers: { 'Content-Type': 'applications/json', },
 });
