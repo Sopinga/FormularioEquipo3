@@ -103,6 +103,8 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             email: email.value,
             cedula: cedula.value,
             rut: rut.value,
+            contrasena: password.value,
+            repetirContrasena: confirmPassword.value,
         };
         const responseAlta = await fetch("http://localhost:3000/personas", {
             method: "POST",

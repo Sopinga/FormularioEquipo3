@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('.btnEditar').forEach(button => {
                 button.addEventListener('click', function () {
                     const id = this.parentNode.getAttribute('data-id');
-                    EditPerson(id);  // Llamada a la función async
+                    SeePerson(id);  // Llamada a la función async
                 });
             });
         });
