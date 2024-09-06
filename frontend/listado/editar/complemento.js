@@ -80,7 +80,7 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
         cedulaError.textContent = 'La cédula es obligatoria.';
         cedulaError.style.display = 'block';
         isValid = false;
-    } else if (!ced.test(rut.value)) {
+    } else if (!cedulaPattern.test(cedula.value)) {
         rutError.textContent = 'El RUT debe tener 12 dígitos.';
         rutError.style.display = 'block';
         isValid = false;
