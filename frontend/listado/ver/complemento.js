@@ -6,11 +6,12 @@ function getQueryParam(param) {
 const id = getQueryParam('id');
 
 if (id) {
-    fetchPersonData();
+    getPerson(id);
 } else {
     console.error('ID de persona no proporcionado');
 }
-async function getPerson() {
+
+async function getPerson(id) {
     try {
         const response = await fetch(`http://localhost:3000/personas/${id}`, {
             method: 'GET',
@@ -21,8 +22,8 @@ async function getPerson() {
 
         if (response.ok) {
             const persona = await response.json();
-            document.getElementById('person-name').innerText = persona.nombre;
-            document.getElementById('lastname').innerText = persona.apellido;
+            document.getElementById('nombre').innerText = persona.nombre;
+            document.getElementById('apellido').innerText = persona.apellido;
             document.getElementById('email').innerText = persona.email;
             document.getElementById('cedula').innerText = persona.cedula;
             document.getElementById('rut').innerText = persona.rut;
@@ -36,8 +37,4 @@ async function getPerson() {
         console.error('Error al obtener los datos de la persona:', error);
         alert('Error al obtener los datos de la persona');
     }
-
-    document.getElementById('volverBtn').addEventListener('click', function () {
-        window.location.href = 'http://localhost';
-    });
 }

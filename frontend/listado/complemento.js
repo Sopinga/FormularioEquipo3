@@ -66,7 +66,7 @@ async function DeletePerson(id) {
 
         if (!response.ok) {
             alert('Persona eliminada con éxito');
-            window.location.href = '/';
+            window.location.reload();
         };
 
     } catch (error) {
@@ -75,5 +75,8 @@ async function DeletePerson(id) {
     }
 };
 async function EditPerson(id) {
+    window.location.href = `./editar/index.html?id=${id}`;
+}
+async function seePerson(id) {
     window.location.href = `./ver/index.html?id=${id}`;
 }
