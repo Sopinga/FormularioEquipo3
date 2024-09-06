@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             data.forEach(persona => {
-                // Crear el contenedor de la tarjeta
+                // Crear el contenedor de la tarjet
                 const card = document.createElement('div');
                 card.classList.add('card');
 
