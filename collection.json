@@ -87,7 +87,7 @@
 			"response": []
 		},
 		{
-			"name": "put",
+			"name": "delete",
 			"request": {
 				"method": "DELETE",
 				"header": [],
