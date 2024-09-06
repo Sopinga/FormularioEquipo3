@@ -8,9 +8,5 @@
     "target": "ES2022",
     "esModuleInterop": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/validations/idAlgorithm.ts",
-    "src/validations/rutAlgorithm.ts"
-  ]
+  "include": ["src/**/*.ts"]
 }
