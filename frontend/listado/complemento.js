@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // Añadir event listeners para los botones de acción async
             document.querySelectorAll('.btnEditar').forEach(button => {
                 button.addEventListener('click', function () {
-                    const id = this.parentNode.getAttribute('data-id');
-                    SeePerson(id);  // Llamada a la función async
+                    const id = this.parentNode.getAttribute('id');
+                    seePerson(id);  // Llamada a la función async
                 });
             });
         });
@@ -74,9 +74,7 @@ async function DeletePerson(id) {
         alert('Error al eliminar la persona');
     }
 };
-async function EditPerson(id) {
-    window.location.href = `./editar/index.html?id=${id}`;
-}
+
 async function seePerson(id) {
-    window.location.href = `./ver/index.html?id=${id}`;
+    window.location.href = `./listado/ver/index.html?id=${id}`;
 }

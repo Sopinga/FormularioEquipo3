@@ -185,8 +185,7 @@ function validarRutUruguayo(rut) {
     return verifier === (expectedVerifier === 10 ? 0 : expectedVerifier);
 }
 
-const cancelarBtn = document.getElementById('cancelBtn')
-cancelarBtn.addEventListener('click', function () {
+document.getElementById('cancelBtn').addEventListener('click', function () {
     window.alert('Los datos no se han guardado');
-    window.location.href = './../listado/index.html';
+    window.location.href = `../../index.html`;
 });

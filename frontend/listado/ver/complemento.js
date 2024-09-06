@@ -22,11 +22,11 @@ async function getPerson(id) {
 
         if (response.ok) {
             const persona = await response.json();
-            document.getElementById('nombre').innerText = persona.nombre;
-            document.getElementById('apellido').innerText = persona.apellido;
-            document.getElementById('email').innerText = persona.email;
-            document.getElementById('cedula').innerText = persona.cedula;
-            document.getElementById('rut').innerText = persona.rut;
+            document.getElementById('nombre').value = persona.nombre;
+            document.getElementById('apellido').value = persona.apellido;
+            document.getElementById('email').value = persona.email;
+            document.getElementById('cedula').value = persona.cedula;
+            document.getElementById('rut').value = persona.rut;
 
             console.log('La persona se ha cargado correctamente:', persona);
         } else {
