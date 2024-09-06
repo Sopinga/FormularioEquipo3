@@ -27,7 +27,6 @@ async function getPerson(id) {
             document.getElementById('email').innerText = persona.email;
             document.getElementById('cedula').innerText = persona.cedula;
             document.getElementById('rut').innerText = persona.rut;
-            document.getElementById('contrasena').innerText = persona.contrasena;
 
             console.log('La persona se ha cargado correctamente:', persona);
         } else {
