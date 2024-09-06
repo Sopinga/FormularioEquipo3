@@ -83,6 +83,6 @@ async function DeletePerson(id) {
 async function EditPerson(id) {
     window.location.href = `./editar/index.html?id=${id}`;
 }
-async function seePerson(id) {
+async function SeePerson(id) {
     window.location.href = `./ver/index.html?id=${id}`;
 }
