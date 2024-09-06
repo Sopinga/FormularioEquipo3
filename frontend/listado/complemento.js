@@ -75,5 +75,5 @@ async function DeletePerson(id) {
     }
 };
 async function EditPerson(id) {
-    window.location.href = `./editar/index.html?id=${id}`;
+    window.location.href = `./ver/index.html?id=${id}`;
 }

@@ -11,28 +11,28 @@ const rutRegex = /^\d{12}$/;
 
 export const PersonaSchema = Type.Object({
   id: Type.Number(),
-  name: Type.String({ minLength: 2, maxLength: 50 }),
-  lastname: Type.String({ minLength: 2, maxLength: 50 }),
+  nombre: Type.String({ minLength: 2, maxLength: 50 }),
+  lapellido: Type.String({ minLength: 2, maxLength: 50 }),
   email: Type.String({ type: 'string', format: 'email' }),
-  countryId: Type.String({ pattern: cedulaRegex.source }),
+  cedula: Type.String({ pattern: cedulaRegex.source }),
   rut: Type.String({ pattern: rutRegex.source }),
 });
 
 export const PersonaPostSchema = Type.Object({
-  password: Type.String({
+  contrasena: Type.String({
     minLength: 8,
     maxLength: 20,
     pattern: passwordRegex.source,
   }),
 
   // Se valida la cedula en base a la expresión de antes
-  countryId: Type.String({
+  cedula: Type.String({
     pattern: cedulaRegex.source,
   }),
 
   // Acá la validación para el nombre y apellido
-  name: Type.String({ minLength: 2, maxLength: 50 }),
-  lastname: Type.String({ minLength: 2, maxLength: 50 }),
+  nombre: Type.String({ minLength: 2, maxLength: 50 }),
+  apellido: Type.String({ minLength: 2, maxLength: 50 }),
 
   // Acá la validación para el email
   email: Type.String({ type: 'string', format: 'email' }),
@@ -43,12 +43,12 @@ export const PersonaPostSchema = Type.Object({
 });
 
 export const PersonaPutSchema = Type.Object({
-    name: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
-    lastname: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
-    email: Type.Optional(Type.String({ type: 'string', format: 'email' })),
-    countryId: Type.Optional(Type.String({ pattern: cedulaRegex.source })),
-    rut: Type.Optional(Type.String({ pattern: rutRegex.source })),
-    password: Type.Optional(Type.String()),
+  nombre: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
+  apellido: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
+  email: Type.Optional(Type.String({ type: 'string', format: 'email' })),
+  cedula: Type.Optional(Type.String({ pattern: cedulaRegex.source })),
+  rut: Type.Optional(Type.String({ pattern: rutRegex.source })),
+  contrasena: Type.Optional(Type.String()),
 });
 
 export type PersonaType = Static<typeof PersonaSchema>;

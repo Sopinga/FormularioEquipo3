@@ -1,13 +1,15 @@
-create extension if not exists pgcrypto
-create table if not exists people(
-    id_persona serial primary key,
-    nombre text not null,
-    apellido text not null,
-    email text not null unique,
-    cedula text not null unique,
-    rut bigint not null unique,
-    contrasena text not null,
-)
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-instert into poeple (nombre, apellido, email, cedula, rut, contrasena)
-    values("pepito","rodriguez","roberto@hotmail.com","5.440.395-7",214849650014, crypt(Juancito!8442, gen_salt("bf")));
+CREATE TABLE IF NOT EXISTS personas (
+    id SERIAL PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    cedula TEXT NOT NULL UNIQUE,
+    rut BIGINT NOT NULL UNIQUE,
+    contrasena TEXT NOT NULL
+);
+
+INSERT INTO personas (nombre, apellido, email, cedula, rut, contrasena)
+VALUES ('Pepito', 'Rodriguez', 'roberto@hotmail.com', '5.440.395-7', 214849650014, crypt('Juancito!8442', gen_salt('bf')));
+VALUES ('Pepita', 'Perez', 'perezo@hotmail.com', '5.479.508-3', 18023, crypt('Juanita!8442', gen_salt('bf')));

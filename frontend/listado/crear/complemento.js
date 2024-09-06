@@ -65,10 +65,14 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         isValid = false;
     }
 
-    const cedulaPattern = /^\d{7,10}$/;
+    const cedulaPattern = /^\d{1}\.\d{3}\.\d{3}-\d{1}$/;
     if (cedula.value.trim() === '') {
         cedulaError.textContent = 'La cédula es obligatoria.';
         cedulaError.style.display = 'block';
+        isValid = false;
+    } else if (!ced.test(rut.value)) {
+        rutError.textContent = 'El RUT debe tener 12 dígitos.';
+        rutError.style.display = 'block';
         isValid = false;
     } else if (!validarCedulaUruguaya(cedula.value)) {
         cedulaError.textContent = 'La cédula es incorrecta, intenta de nuevo.';
