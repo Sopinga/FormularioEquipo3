@@ -54,7 +54,7 @@ const personaRoute: FastifyPluginAsync = async (
     }
   });
   // Ruta para eliminar una persona
-  fastify.delete("/:id/eliminar", {
+  fastify.delete("/:id", {
     handler: async function (request, reply) {
       const { id } = request.params as { id: string };
       const index = personas.findIndex((p) => p.id === parseInt(id));
@@ -71,7 +71,7 @@ const personaRoute: FastifyPluginAsync = async (
     },
   });
   // Ruta para editar una persona
-  fastify.put("/:id/editar", {
+  fastify.put("/:id", {
     schema: {
       body: PersonaPostSchema,
     },
@@ -89,7 +89,7 @@ const personaRoute: FastifyPluginAsync = async (
   });
 
   // Ruta para ver los datos de una persona específica
-  fastify.get("/:id/ver", {
+  fastify.get("/:id", {
     handler: async function (request, reply) {
       const { id } = request.params as { id: string };
       const persona = personas.find((p) => p.id === parseInt(id));
