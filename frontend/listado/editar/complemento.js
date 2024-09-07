@@ -80,7 +80,7 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
         cedulaError.textContent = 'La cédula es obligatoria.';
         cedulaError.style.display = 'block';
         isValid = false;
-    } else if (!ced.test(rut.value)) {
+    } else if (!cedulaPattern.test(cedula.value)) {
         rutError.textContent = 'El RUT debe tener 12 dígitos.';
         rutError.style.display = 'block';
         isValid = false;
@@ -185,8 +185,7 @@ function validarRutUruguayo(rut) {
     return verifier === (expectedVerifier === 10 ? 0 : expectedVerifier);
 }
 
-const cancelarBtn = document.getElementById('cancelBtn')
-cancelarBtn.addEventListener('click', function () {
+document.getElementById('cancelBtn').addEventListener('click', function () {
     window.alert('Los datos no se han guardado');
-    window.location.href = './../listado/index.html';
+    window.location.href = `../../index.html`;
 });
