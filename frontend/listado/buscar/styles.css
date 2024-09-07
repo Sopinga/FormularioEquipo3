@@ -150,7 +150,7 @@ h1 {
 
 .btnEliminar {
   transform: translate(-50%, 125%);
-  width: 30%;
+  width: 25%;
   border-radius: 1rem;
   border: none;
   background-color: #ec1e1e;
@@ -158,7 +158,23 @@ h1 {
   font-size: 1rem;
   padding: .5rem 1rem;
   position: absolute;
-  left: 30%;
+  left: 25%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+}
+
+.btnEliminar {
+  transform: translate(-50%, 125%);
+  width: 25%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #40e24d;
+  color: #fff;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  position: absolute;
+  left: 50%;
   bottom: 0;
   opacity: 0;
   transition: 0.3s ease-out;
@@ -166,7 +182,7 @@ h1 {
 
 .btnEditar {
   transform: translate(-50%, 125%);
-  width: 30%;
+  width: 25%;
   border-radius: 1rem;
   border: none;
   background-color: #008bf8;
@@ -174,7 +190,7 @@ h1 {
   font-size: 1rem;
   padding: .5rem 1rem;
   position: absolute;
-  left: 70%;
+  left: 75%;
   bottom: 0;
   opacity: 0;
   transition: 0.3s ease-out;
