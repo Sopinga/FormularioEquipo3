@@ -2,7 +2,7 @@
 async function getPerson(id) {
     const cardContainer = document.getElementById("card-container");
     // Cargar datos desde el archivo JSON
-    fetch("http://localhost:3000/personas")
+    fetch("http://localhost:3000/backend/personas")
         .then(response => response.json())
         .then(data => {
             data.forEach(persona => {
@@ -57,7 +57,7 @@ async function DeletePerson(id) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/personas/${id}`, {
+        const response = await fetch(`http://localhost:3000/backend/personas/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

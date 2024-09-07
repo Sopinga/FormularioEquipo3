@@ -10,10 +10,16 @@ services:
       - 3000:3000
     volumes:
       - ./backend:/backend
+    environment:
+      - PG_DATABASE=${DB_DATABASE}
+      - PG_USER=${DB_USERNAME}
+      - PG_PASSWORD=${DB_PASSWORD}
+      - PG_HOST=database
+
   frontend:
     image: nginx:alpine
     ports:
-      - 80:80
+      - 80
     volumes:
       - ./frontend:/usr/share/nginx/html
 
@@ -27,3 +33,16 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=personas
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+    environment:
+      - FRONTEND_URL=${FRONTEND_URL}
+      - BACKEND_URL=${BACKEND_URL}
+    depends_on:
+      - backend
+      - frontend

@@ -119,7 +119,7 @@ confirmBtn.addEventListener('click', async function () {
             contrasena: password.value,
             repetirContrasena: confirmPassword.value,
         };
-        const responseAlta = await fetch(`http://localhost:3000/personas/${id}`, {
+        const responseAlta = await fetch(`http://localhost:3000/backend/personas/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'

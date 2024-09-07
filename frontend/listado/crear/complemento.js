@@ -102,7 +102,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             contrasena: password.value,
             repetirContrasena: confirmPassword.value,
         };
-        const responseAlta = await fetch("http://localhost:3000/personas", {
+        const responseAlta = await fetch("http://localhost:3000/backend/personas", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

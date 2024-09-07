@@ -13,7 +13,7 @@ if (id) {
 
 async function getPerson(id) {
     try {
-        const response = await fetch(`http://localhost:3000/personas/${id}`, {
+        const response = await fetch(`http://localhost:3000/backend/personas/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

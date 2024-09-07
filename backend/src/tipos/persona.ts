@@ -51,6 +51,12 @@ export const PersonaPutSchema = Type.Object({
   contrasena: Type.Optional(Type.String()),
 });
 
+
+export const PersonaIdSchema = Type.Object({
+  id: Type.Number(),
+});
+
 export type PersonaType = Static<typeof PersonaSchema>;
 export type PersonaPostType = Static<typeof PersonaPostSchema>;
 export type PersonaPutType = Static<typeof PersonaPutSchema>;
+export type PersonaIdType = Static<typeof PersonaIdSchema>;
