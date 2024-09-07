@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const data = await response.json();
     console.log('Datos recibidos:', data);
     data.forEach(persona => {
+
         // Crear el contenedor de la tarjet
         const card = document.createElement('div');
         card.classList.add('card');
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     </svg></button>
                 `;
         cardContainer.appendChild(card);
+
     });
 });
 
