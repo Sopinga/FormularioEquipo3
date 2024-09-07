@@ -1,12 +1,13 @@
-import swagger, { SwaggerOptions } from "@fastify/swagger";
-import fp from "fastify-plugin";
-import swaggerui from "@fastify/swagger-ui";
-const options: SwaggerOptions = {
+import swagger, {SwaggerOptions} from '@fastify/swagger';
+import fp from 'fastify-plugin'
+import swaggerUI from '@fastify/swagger-ui';
+
+const options : SwaggerOptions = {
     openapi: {
         openapi: '3.0.0',
         info: {
-            title: 'Test swagger',
-            description: 'Testing the Fastify swagger API',
+            title: 'Personas API',
+            description: 'Personas API Documentation',
             version: '0.1.0'
         },
         servers: [
@@ -16,7 +17,7 @@ const options: SwaggerOptions = {
             }
         ],
         tags: [
-            { name: 'personas', description: 'User related end-points' },
+            {name: 'persona', description: 'Persona description'}
         ],
         components: {
             securitySchemes: {
@@ -32,25 +33,23 @@ const options: SwaggerOptions = {
             description: 'Find more info here'
         }
     }
+}
 
-
-
-};
 export default fp<SwaggerOptions>(async (fastify) => {
-    await fastify.register(swagger, options);
-    await fastify.register(swaggerui, {
-        routePrefix: '/docs',
-        uiConfig: {
-            docExpansion: 'full',
-            deepLinking: false
-        },
-        uiHooks: {
-            onRequest: function (request, reply, next) { next() },
-            preHandler: function (request, reply, next) { next() }
-        },
-        staticCSP: true,
-        transformStaticCSP: (header) => header,
-        transformSpecification: (swaggerObject, request, reply) => { return swaggerObject },
-        transformSpecificationClone: true
+        fastify.register(swagger, options);
+        await fastify.register(swaggerUI, {routePrefix: 'docs',
+            uiConfig: {
+                docExpansion: 'full',
+                deepLinking: false
+            },
+            uiHooks: {
+                onRequest: function (request, reply, next) { next() },
+                preHandler: function (request, reply, next) { next() }
+            },
+            staticCSP: true,
+            transformStaticCSP: (header) => header,
+            transformSpecification: (swaggerObject, request, reply) => { return swaggerObject },
+            transformSpecificationClone: true})
     })
-})
+
+

@@ -1,13 +1,13 @@
 name: Persona
 services:
   backend:
-    image: backend:production
+    image: backend
     container_name: backend
     build:
       context: ./backend
     command: sh -c "npm install;npm run dev"
     ports:
-      - 3000:3000
+      - 3000
     volumes:
       - ./backend:/backend
     environment:

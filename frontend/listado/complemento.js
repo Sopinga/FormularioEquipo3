@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const cardContainer = document.getElementById("card-container");
 
     console.log('Haciendo fetch a:', `http://localhost/backend/personas`);
-    const response = await fetch(`http://localhost/backend/personas`);
+    const response = await fetch(`http://localhost/backend/personas`);// aca falla
     const data = await response.json();
     console.log('Datos recibidos:', data);
     data.forEach(persona => {
