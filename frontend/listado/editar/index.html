@@ -8,44 +8,43 @@
 </head>
 
 <body>
-    <h1>Aca se va a poder editar una persona</h1>
-    <h5> poner contenedores para los datos</h5>
-    <h5>hacer una forma para obtener el id para el put</h5>
-    <h5>hay que hacer un get para mostrar los datos actuales</h5>
-
-</body>
     <div>
-            <form id="Edicion de informacion de la persona" novalidate>
-                <label for="nuevoNombre">Nuevo nombre:</label>
-                <input type="text" id="nuevoNombre" name="nuevoNombre">
-                <span class="error" id="nombreError"></span><br>
+        <form id="Edicion de informacion de la persona" novalidate>
+            <label for="nuevoNombre">Nuevo nombre:</label>
+            <input type="text" id="nuevoNombre" name="nuevoNombre">
+            <span class="error" id="nombreError"></span><br>
 
-                <label for="nuevoApellido">Nuevo Apellido:</label>
-                <input type="text" id="nuevoApellido" name="nuevoApellido">
-                <span class="error" id="apellidoError"></span><br>
+            <label for="nuevoApellido">Nuevo Apellido:</label>
+            <input type="text" id="nuevoApellido" name="nuevoApellido">
+            <span class="error" id="apellidoError"></span><br>
 
-                <label for="nuevaContrasena">Nueva contrasena:</label>
-                <input type="text" id="nuevaContrasena" name="nuevaContrasena">
-                <span class="error" id="passwordError"></span><br>
+            <label for="nuevaContrasena">Nueva contrasena:</label>
+            <input type="text" id="nuevaContrasena" name="nuevaContrasena">
+            <span class="error" id="passwordError"></span><br>
 
-                <label for="confirmarNuevaContrasena"> Confirmar nueva contrasena:</label>
-                <input type="text" id="confirmarNuevaContrasena" name="confirmarNuevaContrasena">
-                <span class="error" id="confirmPasswordError"></span><br>
+            <label for="confirmarNuevaContrasena"> Confirmar nueva contrasena:</label>
+            <input type="text" id="confirmarNuevaContrasena" name="confirmarNuevaContrasena">
+            <span class="error" id="confirmPasswordError"></span><br>
 
-                <label for="nuevoEmail">Nuevo Correo Electronico:</label>
-                <input type="text" id="nuevoEmail" name="nuevoEmail">
-                <span class="error" id="emailError"></span><br>
-                
-                <label for="nuevaCedula">Nueva cédula:</label>
-                <input type="text" id="nuevaCedula" name="nuevaCedula">
-                <span class="error" id="cedulaError"></span><br>
+            <label for="nuevoEmail">Nuevo Correo Electronico:</label>
+            <input type="text" id="nuevoEmail" name="nuevoEmail">
+            <span class="error" id="emailError"></span><br>
 
-                <label for="nuevoRut">Nuevo RUT:</label>
-                <input type="text" id="nuevoRut" name="nuevoRut">
-                <span class="error" id="rutError"></span><br>
+            <label for="nuevaCedula">Nueva cédula:</label>
+            <input type="text" id="nuevaCedula" name="nuevaCedula">
+            <span class="error" id="cedulaError"></span><br>
+
+            <label for="nuevoRut">Nuevo RUT:</label>
+            <input type="text" id="nuevoRut" name="nuevoRut">
+            <span class="error" id="rutError"></span><br>
     </div>
 
-    <button class="botonlindo" type="botom" id="validateBtn">Validar</button>
-    
+    <button class="botonlindo" type="botom" id="ConfirmBtn">confirmar</button>
+    <button class="botonlindo" type="botom" id="cancelBtn">Cancelar</button>
+
+    <script src="./complemento.js"></script>
+
+</body>
+
 
 </html>

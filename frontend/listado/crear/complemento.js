@@ -70,7 +70,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         cedulaError.textContent = 'La cédula es obligatoria.';
         cedulaError.style.display = 'block';
         isValid = false;
-    } else if (!ced.test(rut.value)) {
+    } else if (!cedulaPattern.test(cedula.value)) {
         rutError.textContent = 'El RUT debe tener 12 dígitos.';
         rutError.style.display = 'block';
         isValid = false;
@@ -90,10 +90,6 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         rutError.textContent = 'El RUT debe tener 12 dígitos.';
         rutError.style.display = 'block';
         isValid = false;
-    } else if (validarRutUruguayo(rut.value)) {
-        rutError.textContent = 'El RUT no es válido.';
-        rutError.style.display = 'block';
-        isValid = false;
     }
 
     if (isValid) {
@@ -103,6 +99,8 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             email: email.value,
             cedula: cedula.value,
             rut: rut.value,
+            contrasena: password.value,
+            repetirContrasena: confirmPassword.value,
         };
         const responseAlta = await fetch("http://localhost:3000/personas", {
             method: "POST",
@@ -154,20 +152,5 @@ function validarCedulaUruguaya(cedula) {
     // Verificar si el dígito verificador es correcto
     return digitoCorrecto === digitoVerificador;
 }
-function validarRutUruguayo(rut) {
-    if (!/^\d{11,12}$/.test(rut)) {
-        return false;
-    }
-    const digits = rut.split('').map(Number);
-    const verifier = digits.pop();
-    const weights = [2, 3, 4, 5, 6, 7];
-    let sum = 0;
-    let weightIndex = 0;
-    for (let i = digits.length - 1; i >= 0; i--) {
-        sum += digits[i] * weights[weightIndex];
-        weightIndex = (weightIndex + 1) % weights.length;
-    }
-    const expectedVerifier = (11 - (sum % 11)) % 11;
-    return verifier === (expectedVerifier === 10 ? 0 : expectedVerifier);
-}
+
 
