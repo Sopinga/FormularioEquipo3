@@ -3,13 +3,15 @@
 }
 
 body {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  background-color: #918b8b;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #130f40;
-  font-family: 'Lato' !important;
-  display: block;
+  height: 100vh;
 }
 
 .search-box {
@@ -100,18 +102,20 @@ body {
 }
 
 h1 {
-  color: #61a7ec;
-  margin-bottom: 30px;
-  font-size: 2.5em;
-  text-transform: uppercase;
+  color: #8e44ad;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
   gap: 30px;
-  margin-top: 30px;
-
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  /* Permite que las tarjetas se ajusten en varias filas si es necesario */
+  padding: 20px;
 }
 
 .card {
@@ -124,6 +128,8 @@ h1 {
   border: 2px solid #c3c6ce;
   transition: 0.5s ease-out;
   overflow: visible;
+  flex-grow: 1;
+  /* Hace que las tarjetas se ajusten al espacio disponible */
 }
 
 .card:hover {
@@ -148,60 +154,38 @@ h1 {
   font-weight: bold;
 }
 
-.btnEliminar {
+button {
   transform: translate(-50%, 125%);
   width: 25%;
   border-radius: 1rem;
   border: none;
-  background-color: #ec1e1e;
   color: #fff;
   font-size: 1rem;
   padding: .5rem 1rem;
   position: absolute;
-  left: 25%;
   bottom: 0;
   opacity: 0;
   transition: 0.3s ease-out;
 }
 
 .btnEliminar {
-  transform: translate(-50%, 125%);
-  width: 25%;
-  border-radius: 1rem;
-  border: none;
+  background-color: #ec1e1e;
+  left: 25%;
+}
+
+.btnSee {
   background-color: #40e24d;
-  color: #fff;
-  font-size: 1rem;
-  padding: .5rem 1rem;
-  position: absolute;
   left: 50%;
-  bottom: 0;
-  opacity: 0;
-  transition: 0.3s ease-out;
 }
 
 .btnEditar {
-  transform: translate(-50%, 125%);
-  width: 25%;
-  border-radius: 1rem;
-  border: none;
   background-color: #008bf8;
-  color: #fff;
-  font-size: 1rem;
-  padding: .5rem 1rem;
-  position: absolute;
   left: 75%;
-  bottom: 0;
-  opacity: 0;
-  transition: 0.3s ease-out;
 }
 
+.card:hover .btnEliminar,
+.card:hover .btnSee,
 .card:hover .btnEditar {
-  transform: translate(-50%, 50%);
-  opacity: 1;
-}
-
-.card:hover .btnEliminar {
-  transform: translate(-50%, 50%);
+  transform: translate(-33%, 33%);
   opacity: 1;
 }
