@@ -2,20 +2,23 @@ function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
 }
-const id = getQueryParam('id');
-if (id) {
-    obtenerDatosPersona();
-} else {
+
+const idPersona = getQueryParam('id');
+
+if (!idPersona) {
+
     console.error('ID de persona no proporcionado');
 }
+const confirmBtn = document.getElementById("ConfirmBtn");
+
 document.getElementById('ConfirmBtn').addEventListener('click', async function () {
-    const nombre = document.getElementById('nombre');
-    const apellido = document.getElementById('apellido');
-    const password = document.getElementById('password');
-    const confirmPassword = document.getElementById('confirmPassword');
-    const email = document.getElementById('email');
-    const cedula = document.getElementById('cedula');
-    const rut = document.getElementById('rut');
+    const nombre = document.getElementById('nuevoNombre');
+    const apellido = document.getElementById('nuevoApellido');
+    const password = document.getElementById('nuevaContrasena');
+    const confirmPassword = document.getElementById('confirmarNuevaContrasena');
+    const email = document.getElementById('nuevoEmail');
+    const cedula = document.getElementById('nuevaCedula');
+    const rut = document.getElementById('nuevoRut');
 
     const nombreError = document.getElementById('nombreError');
     const apellidoError = document.getElementById('apellidoError');
@@ -148,26 +151,25 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
         rutError.style.display = 'block';
         isValid = false;
     }
-});
-const confirmBtn = document.getElementById("ConfirmBtn")
-confirmBtn.addEventListener('click', async function () {
+
+
     if (isValid) {
-        const cambiosPersona = {
-            id: id,
+        const personaBuscada = {
             nombre: nombre.value,
             apellido: apellido.value,
             email: email.value,
             cedula: cedula.value,
             rut: rut.value,
             contrasena: password.value,
-            repetirContrasena: confirmPassword.value,
+
         };
-        const responseAlta = await fetch(`http://localhost:3000/backend/personas/${id}`, {
+        console.log("aprobo los campos, ", idPersona)
+        const responseAlta = await fetch(`http://localhost/backend/personas/${idPersona}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(cambiosPersona),
+            body: JSON.stringify(personaBuscada),
         });
 
         if (responseAlta.ok) {

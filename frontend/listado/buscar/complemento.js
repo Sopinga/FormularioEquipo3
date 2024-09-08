@@ -51,7 +51,7 @@ async function DeletePerson(id) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/backend/personas/${id}`, {
+        const response = await fetch(`http://localhost/backend/personas/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

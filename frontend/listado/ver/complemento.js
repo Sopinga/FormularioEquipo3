@@ -3,22 +3,18 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-const id = getQueryParam('id');
+const idPersona = getQueryParam('id');
 
-if (id) {
-    getPerson(id);
+if (idPersona) {
+    getPerson(idPersona);
 } else {
     console.error('ID de persona no proporcionado');
 }
 
-async function getPerson(id) {
+async function getPerson(idPersona) {
     try {
-        const response = await fetch(`http://localhost:3000/backend/personas/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        console.log('Haciendo fetch a:', `http://localhost/backend/personas/${idPersona}`);
+        const response = await fetch(`http://localhost/backend/personas/${idPersona}`);
 
         if (response.ok) {
             const persona = await response.json();
