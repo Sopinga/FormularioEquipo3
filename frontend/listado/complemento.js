@@ -82,3 +82,7 @@ async function EditPerson(id) {
     window.location.href = `./listado/editar/index.html?id=${id}`;
 
 }
+async function CreatePerson(id) {
+    window.location.href = `./listado/crear/index.html`;
+
+}

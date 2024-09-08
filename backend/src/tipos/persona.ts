@@ -19,25 +19,11 @@ export const PersonaSchema = Type.Object({
 });
 
 export const PersonaPostSchema = Type.Object({
-  contrasena: Type.String({
-    minLength: 8,
-    maxLength: 20,
-    pattern: passwordRegex.source,
-  }),
-
-  // Se valida la cedula en base a la expresión de antes
-  cedula: Type.String({
-    pattern: cedulaRegex.source,
-  }),
-
-  // Acá la validación para el nombre y apellido
+  contrasena: Type.String({ minLength: 8, maxLength: 20, pattern: passwordRegex.source, }),
+  cedula: Type.String({ pattern: cedulaRegex.source, }),
   nombre: Type.String({ minLength: 2, maxLength: 50 }),
   apellido: Type.String({ minLength: 2, maxLength: 50 }),
-
-  // Acá la validación para el email
   email: Type.String({ type: 'string', format: 'email' }),
-
-  // Acá la validación para el rut
   rut: Type.String({ pattern: rutRegex.source }),
 
 });

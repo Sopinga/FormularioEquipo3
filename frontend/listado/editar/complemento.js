@@ -9,13 +9,13 @@ if (id) {
     console.error('ID de persona no proporcionado');
 }
 document.getElementById('ConfirmBtn').addEventListener('click', async function () {
-    const nombre = document.getElementById('nuevoNombre');
-    const apellido = document.getElementById('nuevoApellido');
-    const password = document.getElementById('nuevaPassword');
-    const confirmPassword = document.getElementById('confirmarNuevaPassword');
-    const email = document.getElementById('nuevoEmail');
-    const cedula = document.getElementById('nuevaCedula');
-    const rut = document.getElementById('nuevoRut');
+    const nombre = document.getElementById('nombre');
+    const apellido = document.getElementById('apellido');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const email = document.getElementById('email');
+    const cedula = document.getElementById('cedula');
+    const rut = document.getElementById('rut');
 
     const nombreError = document.getElementById('nombreError');
     const apellidoError = document.getElementById('apellidoError');
@@ -37,10 +37,20 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
         nombreError.style.display = 'block';
         isValid = false;
     }
+    if (nombre.value.length < 2 || nombre.value.length > 50) {
+        nombreError.textContent = 'El nombre es demasiado corto o largo.';
+        nombreError.style.display = 'block';
+        isValid = false;
+    }
 
     if (apellido.value.trim() === '') {
         apellidoError.textContent = 'El apellido es obligatorio.';
         apellidoError.style.display = 'block';
+        isValid = false;
+    }
+    if (apellido.value.length < 2 || apellido.value.length > 50) {
+        nombreError.textContent = 'El nombre es demasiado corto o largo.';
+        nombreError.style.display = 'block';
         isValid = false;
     }
 
@@ -52,11 +62,49 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
         passwordError.textContent = 'La contraseña debe tener al menos 6 caracteres.';
         passwordError.style.display = 'block';
         isValid = false;
+    } else if (!/[A-Z]/.test(password.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos una mayuscula.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    }
+    else if (!/[a-z]/.test(password.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos una minuscula.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[0-9]/.test(password.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos un número.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[!@#$%^&*_-]/.test(password.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos un carácter especial (!@#$%^&*_-)';
+        passwordError.style.display = 'block';
+        isValid = false;
     }
 
     if (confirmPassword.value.trim() === '') {
-        confirmPasswordError.textContent = 'Debes confirmar la contraseña.';
-        confirmPasswordError.style.display = 'block';
+        passwordError.textContent = 'La contraseña es obligatoria.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (confirmPassword.value.length < 6) {
+        passwordError.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[A-Z]/.test(confirmPassword.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos una mayuscula.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    }
+    else if (!/[a-z]/.test(confirmPassword.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos una minuscula.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[0-9]/.test(confirmPassword.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos un número.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[!@#$%^&*_-]/.test(confirmPassword.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos un carácter especial (!@#$%^&*_-)';
+        passwordError.style.display = 'block';
         isValid = false;
     } else if (confirmPassword.value !== password.value) {
         confirmPasswordError.textContent = 'Las contraseñas no coinciden.';
@@ -81,8 +129,8 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
         cedulaError.style.display = 'block';
         isValid = false;
     } else if (!cedulaPattern.test(cedula.value)) {
-        rutError.textContent = 'El RUT debe tener 12 dígitos.';
-        rutError.style.display = 'block';
+        cedulaError.textContent = 'La cedula debe de tener 8 digitos, separados por puntos y un guion.';
+        cedulaError.style.display = 'block';
         isValid = false;
     } else if (!validarCedulaUruguaya(cedula.value)) {
         cedulaError.textContent = 'La cédula es incorrecta, intenta de nuevo.';
@@ -91,17 +139,12 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
     }
 
     // Validación específica para el RUT uruguayo (12 dígitos + verificador)
-    const rutPattern = /^\d{12}$/;
     if (rut.value.trim() === '') {
         rutError.textContent = 'El RUT es obligatorio.';
         rutError.style.display = 'block';
         isValid = false;
-    } else if (!rutPattern.test(rut.value)) {
-        rutError.textContent = 'El RUT debe tener 12 dígitos.';
-        rutError.style.display = 'block';
-        isValid = false;
     } else if (validarRutUruguayo(rut.value)) {
-        rutError.textContent = 'El RUT no es válido.';
+        rutError.textContent = 'El RUT debe tener 12 dígitos.';
         rutError.style.display = 'block';
         isValid = false;
     }

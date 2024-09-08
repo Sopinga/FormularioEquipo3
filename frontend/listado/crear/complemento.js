@@ -27,10 +27,20 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         nombreError.style.display = 'block';
         isValid = false;
     }
+    if (nombre.value.length < 2 || nombre.value.length > 50) {
+        nombreError.textContent = 'El nombre es demasiado corto o largo.';
+        nombreError.style.display = 'block';
+        isValid = false;
+    }
 
     if (apellido.value.trim() === '') {
         apellidoError.textContent = 'El apellido es obligatorio.';
         apellidoError.style.display = 'block';
+        isValid = false;
+    }
+    if (apellido.value.length < 2 || apellido.value.length > 50) {
+        nombreError.textContent = 'El nombre es demasiado corto o largo.';
+        nombreError.style.display = 'block';
         isValid = false;
     }
 
@@ -42,11 +52,49 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         passwordError.textContent = 'La contraseña debe tener al menos 6 caracteres.';
         passwordError.style.display = 'block';
         isValid = false;
+    } else if (!/[A-Z]/.test(password.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos una mayuscula.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    }
+    else if (!/[a-z]/.test(password.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos una minuscula.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[0-9]/.test(password.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos un número.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[!@#$%^&*_-]/.test(password.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos un carácter especial (!@#$%^&*_-)';
+        passwordError.style.display = 'block';
+        isValid = false;
     }
 
     if (confirmPassword.value.trim() === '') {
-        confirmPasswordError.textContent = 'Debes confirmar la contraseña.';
-        confirmPasswordError.style.display = 'block';
+        passwordError.textContent = 'La contraseña es obligatoria.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (confirmPassword.value.length < 8) {
+        passwordError.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[A-Z]/.test(confirmPassword.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos una mayuscula.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    }
+    else if (!/[a-z]/.test(confirmPassword.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos una minuscula.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[0-9]/.test(confirmPassword.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos un número.';
+        passwordError.style.display = 'block';
+        isValid = false;
+    } else if (!/[!@#$%^&*_-]/.test(confirmPassword.value)) {
+        passwordError.textContent = 'La contraseña debe tener al menos un carácter especial (!@#$%^&*_-)';
+        passwordError.style.display = 'block';
         isValid = false;
     } else if (confirmPassword.value !== password.value) {
         confirmPasswordError.textContent = 'Las contraseñas no coinciden.';
@@ -71,8 +119,8 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         cedulaError.style.display = 'block';
         isValid = false;
     } else if (!cedulaPattern.test(cedula.value)) {
-        rutError.textContent = 'El RUT debe tener 12 dígitos.';
-        rutError.style.display = 'block';
+        cedulaError.textContent = 'La cedula debe de tener 8 digitos, separados por puntos y un guion.';
+        cedulaError.style.display = 'block';
         isValid = false;
     } else if (!validarCedulaUruguaya(cedula.value)) {
         cedulaError.textContent = 'La cédula es incorrecta, intenta de nuevo.';
@@ -81,12 +129,11 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     }
 
     // Validación específica para el RUT uruguayo (12 dígitos + verificador)
-    const rutPattern = /^\d{12}$/;
     if (rut.value.trim() === '') {
         rutError.textContent = 'El RUT es obligatorio.';
         rutError.style.display = 'block';
         isValid = false;
-    } else if (!rutPattern.test(rut.value)) {
+    } else if (validarRutUruguayo(rut.value)) {
         rutError.textContent = 'El RUT debe tener 12 dígitos.';
         rutError.style.display = 'block';
         isValid = false;
@@ -97,24 +144,33 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             nombre: nombre.value,
             apellido: apellido.value,
             email: email.value,
+            contrasena: password.value,
             cedula: cedula.value,
             rut: rut.value,
-            contrasena: password.value,
-            repetirContrasena: confirmPassword.value,
+
+
         };
-        const responseAlta = await fetch("http://localhost:3000/backend/personas", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nuevaPersona),
+        try {
+            const responseAlta = await fetch('http://localhost/backend/personas', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuevaPersona),
 
-        });
+            });
 
-        if (responseAlta.ok) {
-            window.location.href = '../cards/datos.html'
+            if (responseAlta.ok) {
+                alert('Todos los campos son válidos.');
+                window.location.href = '../../index.html'
+            } else {
+                alert('Error al registrar la persona');
+            }
+        } catch (error) {
+            console.error('Error al registrar la persona:', error);
+            alert('Error al registrar la persona');
         }
-        alert('Todos los campos son válidos.');
+
     }
 });
 
@@ -151,6 +207,35 @@ function validarCedulaUruguaya(cedula) {
 
     // Verificar si el dígito verificador es correcto
     return digitoCorrecto === digitoVerificador;
-}
+};
+function verificadorRut(rut) {
+    const pesos = [2, 9, 8, 7, 6, 3, 4];
+    let suma = 0;
 
+    // Convertir el RUT a un string para procesarlo dígito por dígito
+    const rutStr = rut.toString();
+
+    // Recorrer el RUT en sentido inverso (excepto el dígito verificador)
+    for (let i = 0; i < rutStr.length; i++) {
+        const digito = parseInt(rutStr.charAt(rutStr.length - 1 - i), 10);
+        suma += digito * pesos[i];
+    }
+
+    // Calcular el módulo 11
+    const modulo = suma % 11;
+    const digitoVerificador = modulo === 0 ? 0 : modulo === 1 ? 'X' : 11 - modulo;
+
+    return digitoVerificador;
+}
+function validarRutUruguayo(rut) {
+    if (/^\d{12}$/.test(rut)) {
+        const rutWithoutVerifier = rut.slice(0, -1); // Take the first 11 digits
+        const verifyingDigit = verificadorRut(rutWithoutVerifier);
+        const actualVerifier = parseInt(rut.charAt(11)); // Get the last digit (verifier)
+        console.log("Comprobando si el digito verificador es correcto.")
+        return verifyingDigit === actualVerifier;
+    }
+    console.log("El rut no cumple con el patron.")
+    return false;
+}
 

@@ -1,8 +1,6 @@
 import { FastifyPluginAsync, FastifyPluginOptions } from "fastify";
 import { FastifyInstance } from "fastify/types/instance.js";
 import { PersonaPutSchema, PersonaPutType, PersonaPostType, PersonaPostSchema, PersonaIdSchema } from "../../tipos/persona.js";
-import { validateCedula } from "../../validations/idAlgorithm.js";
-import { validateRut } from "../../validations/rutAlgorithm.js";
 import { query } from "../../services/database.js";
 
 // Definición del plugin de ruta
@@ -38,14 +36,18 @@ const personaRoute: FastifyPluginAsync = async (
       tags: ["persona"],
       body: PersonaPostSchema,
     },
-    preHandler: [validateCedula, validateRut],
     handler: async function (request, reply) {
       const personaPost = request.body as PersonaPostType;
       // Ahora lo conectamos a la base de datos
       const res = await query(`insert into personas
             (nombre, apellido, email, cedula, rut, contrasena)
             values
-            ('${personaPost.nombre}', '${personaPost.apellido}', '${personaPost.email}', '${personaPost.cedula}', '${personaPost.rut}', '${personaPost.contrasena}')
+            ('${personaPost.nombre}', 
+            '${personaPost.apellido}', 
+            '${personaPost.email}', 
+            '${personaPost.cedula}', 
+            '${personaPost.rut}', 
+            '${personaPost.contrasena}')
             returning id;`);
       const id = res.rows[0].id;
       if (res.rows.length === 0) {
@@ -115,7 +117,7 @@ const personaRoute: FastifyPluginAsync = async (
         },
       },
     },
-    preHandler: [validateCedula, validateRut],
+
     handler: async function (request, reply) {
       const { id } = request.params as { id: string };
       const personaPut = request.body as PersonaPutType;
@@ -147,10 +149,10 @@ const personaRoute: FastifyPluginAsync = async (
           type: "object",
           properties: {
             id: { type: "number" },
-            name: { type: "string" },
-            lastname: { type: "string" },
+            nombre: { type: "string" },
+            apellido: { type: "string" },
             email: { type: "string" },
-            countryid: { type: "string" },
+            cedula: { type: "string" },
             rut: { type: "string" },
           },
         },

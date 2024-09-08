@@ -7,7 +7,7 @@ async function getPerson(id) {
     const data = await response.json();
     console.log('Datos recibidos:', data);
     data.forEach(persona => {
-        if (persona.id == id) {
+        if (persona.id === id) {
             // Crear el contenedor de la tarjet
             const card = document.createElement('div');
             card.classList.add('card');
