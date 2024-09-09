@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
-  background-color: #918b8b;
+  background-color: #272727;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,8 +19,8 @@ body {
   width: fit-content;
   height: fit-content;
   position: relative;
-  display: block;
-  float: center;
+  display: flex;
+  float: left;
   justify-content: center;
   align-items: center;
 
@@ -89,16 +89,7 @@ body {
   width: 100%;
   margin-bottom: 100px;
   font-family: 'Lato' !important;
-  display: flex;
-}
-
-body {
-  font-family: 'Georgia', serif;
-  background-color: #000;
-  margin: 0;
-  padding: 30px;
-  text-align: left;
-  line-height: 1.6;
+  display: block;
 }
 
 h1 {
@@ -107,6 +98,8 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
 }
+
+
 
 .card-container {
   display: flex;
@@ -154,7 +147,7 @@ h1 {
   font-weight: bold;
 }
 
-button {
+.card button {
   transform: translate(-50%, 125%);
   width: 25%;
   border-radius: 1rem;
