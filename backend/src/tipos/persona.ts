@@ -6,7 +6,7 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_-])[A-Za-z\
 // Expresión regular para el formato de cédula
 const cedulaRegex = /^[1-9]{1}\.[0-9]{3}\.[0-9]{3}-[0-9]{1}$/;
 
-// Expresión regular para el formato del RUT
+// Expresión regular para el formato del RU
 const rutRegex = /^\d{12}$/;
 
 export const PersonaSchema = Type.Object({
