@@ -6,13 +6,13 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_-])[A-Za-z\
 // Expresión regular para el formato de cédula
 const cedulaRegex = /^[1-9]{1}\.[0-9]{3}\.[0-9]{3}-[0-9]{1}$/;
 
-// Expresión regular para el formato del RUT
+// Expresión regular para el formato del RU
 const rutRegex = /^\d{12}$/;
 
 export const PersonaSchema = Type.Object({
   id: Type.Number(),
   nombre: Type.String({ minLength: 2, maxLength: 50 }),
-  lapellido: Type.String({ minLength: 2, maxLength: 50 }),
+  apellido: Type.String({ minLength: 2, maxLength: 50 }),
   email: Type.String({ type: 'string', format: 'email' }),
   cedula: Type.String({ pattern: cedulaRegex.source }),
   rut: Type.String({ pattern: rutRegex.source }),
