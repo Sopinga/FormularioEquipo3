@@ -1,8 +1,8 @@
-import swagger, {SwaggerOptions} from '@fastify/swagger';
+import swagger, { SwaggerOptions } from '@fastify/swagger';
 import fp from 'fastify-plugin'
 import swaggerUI from '@fastify/swagger-ui';
 
-const options : SwaggerOptions = {
+const options: SwaggerOptions = {
     openapi: {
         openapi: '3.0.0',
         info: {
@@ -17,7 +17,7 @@ const options : SwaggerOptions = {
             }
         ],
         tags: [
-            {name: 'persona', description: 'Persona description'}
+            { name: 'persona', description: 'Persona description' }
         ],
         components: {
             securitySchemes: {
@@ -36,20 +36,22 @@ const options : SwaggerOptions = {
 }
 
 export default fp<SwaggerOptions>(async (fastify) => {
-        fastify.register(swagger, options);
-        await fastify.register(swaggerUI, {routePrefix: 'docs',
-            uiConfig: {
-                docExpansion: 'full',
-                deepLinking: false
-            },
-            uiHooks: {
-                onRequest: function (request, reply, next) { next() },
-                preHandler: function (request, reply, next) { next() }
-            },
-            staticCSP: true,
-            transformStaticCSP: (header) => header,
-            transformSpecification: (swaggerObject, request, reply) => { return swaggerObject },
-            transformSpecificationClone: true})
+    fastify.register(swagger, options);
+    await fastify.register(swaggerUI, {
+        routePrefix: 'docs',
+        uiConfig: {
+            docExpansion: 'full',
+            deepLinking: false
+        },
+        uiHooks: {
+            onRequest: function (request, reply, next) { next() },
+            preHandler: function (request, reply, next) { next() }
+        },
+        staticCSP: true,
+        transformStaticCSP: (header) => header,
+        transformSpecification: (swaggerObject, request, reply) => { return swaggerObject },
+        transformSpecificationClone: true
     })
+})
 
 
