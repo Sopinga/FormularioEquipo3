@@ -1,5 +1,14 @@
+server{
+    listen: 80;
+    listen [::]:80;
+    server_name ${FRONTEND_URL};
+    return 301 https://$host$request_url
+}
 server {
-    listen 80;
+    listen 443;
+    server_name ${FRONTEND_URL};
+    ssl_certificate /etc/nginx/certs/ucu.crt;
+    ssl_certificate_key /etc/nginx/certs/ucu.key;
 
     location / {
 

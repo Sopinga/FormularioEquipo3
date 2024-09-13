@@ -46,3 +46,11 @@ services:
     depends_on:
       - backend
       - frontend
+  proxy:
+    image: proxy
+    container_name: proxy
+    ports: -80:80 -443:443
+    volumes: -./certs:/etc/nginx/certs
+    environment:
+      - FRONTEND_URL=${FRONTEND_URL}
+    depends_on: -frontend -backend
