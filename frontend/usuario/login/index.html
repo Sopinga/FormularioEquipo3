@@ -4,11 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Login de Usuario</title>
 </head>
 
 <body>
+    <div>
+        <h1>Login</h1>
+        <form id="Inicio de sesion" novalidate>
+            <label for="Correo">Correo Electronico</label>
+            <input type="text" placeholder="correo electronico" id="Correo" name="Correo">
+            <span class="Correo" id="Correo" name="Correo"></span><br>
 
+            <label for="Contrasena">Contrasena</label>
+            <input type="password" id="Contrasena" name="Contrasena">
+            <span class="Contrasena" id="Contrasena" name="Contrasena"></span><br>
+
+            <div class="social">
+                <div class="go"><i class="fab fa-google"></i> Google</div>
+            </div>
+        </form>
+        <button>Ingresar</button>
+    </div>
 </body>
 
 </html>
