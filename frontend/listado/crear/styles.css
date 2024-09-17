@@ -85,10 +85,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/534dea38408187.5760b1e4edce9.png);
     background-repeat: repeat;
     background-size: cover;
-    background-color: #f4f4f4;
-
 }
 
 span {

@@ -6,12 +6,16 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
-  background-color: #272727;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-image: url(https://preview.redd.it/minimal-pack-3440x1440-v0-t9t3q6ahrggc1.png?width=3440&format=png&auto=webp&s=6c8d6f8604272ef06b115494f1e5280c688641ec);
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .search-box {
@@ -83,7 +87,8 @@ body {
 .textoArriba h1 {
   margin-left: 4%;
   margin-top: 2%;
-  color: #fff;
+  color: #ff9147c0;
+  text-shadow: #000000 0px 0px 10px;
   font-size: 90px;
   font-weight: bold;
   width: 100%;
