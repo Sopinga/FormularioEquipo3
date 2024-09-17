@@ -13,7 +13,9 @@ const personaRoute: FastifyPluginAsync = async (
     schema: {
       tags: ["persona"],
     },
-    preHandler: [fastify.authenticate],
+
+    onRequest: fastify.authenticate,
+
     handler: async function (request, reply) {
       const res = await query(`SELECT
         id,
@@ -82,7 +84,9 @@ const personaRoute: FastifyPluginAsync = async (
         }
       }
     },
-    preHandler: [fastify.authenticate],
+
+    onRequest: fastify.authenticate,
+
     handler: async function (request, reply) {
       const { id } = request.params as { id: string };
       const res = await query(`DELETE FROM personas WHERE id = ${id};`);
@@ -121,7 +125,9 @@ const personaRoute: FastifyPluginAsync = async (
         }
       }
     },
-    preHandler: [fastify.authenticate],
+
+    onRequest: fastify.authenticate,
+
     handler: async function (request, reply) {
       const { id } = request.params as { id: string };
       const personaPut = request.body as PersonaPutType;
@@ -167,7 +173,8 @@ const personaRoute: FastifyPluginAsync = async (
         }
       }
     },
-    preHandler: [fastify.authenticate],
+    onRequest: fastify.authenticate,
+
     handler: async function (request, reply) {
       const { id } = request.params as { id: string };
       const res = await query(`SELECT 
