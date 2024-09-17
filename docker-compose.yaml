@@ -15,11 +15,16 @@ services:
       - PGUSER=${DB_USERNAME}
       - PGPASSWORD=${DB_PASSWORD}
       - PGHOST=database
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
 
   frontend:
     image: nginx:alpine
     volumes:
       - ./frontend:/usr/share/nginx/html
+    environment:
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
 
   database:
     image: db
@@ -31,6 +36,8 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=personas
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
   proxy:
     image: nginx:alpine
     container_name: proxy
@@ -44,6 +51,9 @@ services:
     environment:
       - FRONTEND_URL=${FRONTEND_URL}
       - BACKEND_URL=${BACKEND_URL}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+
     depends_on:
       - backend
       - frontend
