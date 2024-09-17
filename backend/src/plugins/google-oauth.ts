@@ -13,7 +13,7 @@ export default fp(async (fastify) => {
             auth: oauthPlugin.fastifyOauth2.GOOGLE_CONFIGURATION,
         },
         startRedirectPath: '/auth/login/google',
-        callbackUri: `https://frontend/backend/auth/login/google/callback`,
+        callbackUri: `https://localhost/frontend/backend/auth/login/google/callback`,
         callbackUriParams: {
 
             access_type: 'offline',
