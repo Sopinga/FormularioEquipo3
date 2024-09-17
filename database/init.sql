@@ -3,6 +3,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE TABLE IF NOT EXISTS personas (
     id SERIAL PRIMARY KEY,
     nombre TEXT NOT NULL,
+    nombre2 TEXT,
     apellido TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     cedula TEXT NOT NULL UNIQUE,
