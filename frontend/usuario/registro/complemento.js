@@ -239,3 +239,29 @@ function validarRutUruguayo(rut) {
     return false;
 }
 
+    function validateFile() {
+      var fileInput = document.getElementById('miImagen');
+      var filePath = fileInput.value;
+      var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+      var output = document.getElementById('output');
+  
+      if (!allowedExtensions.exec(filePath)) {
+        imagenError.textContent = 'El archivo seleccionado no es una imagen.';
+        imagenError.style.display = 'block';
+        isValid = false;
+        fileInput.value = '';
+        output.src = '';
+        return false;
+      } else {
+        imagenError.textContent = '';
+        mostrarImagen(fileInput);
+      }
+    }
+  
+    function mostrarImagen(fileInput) {
+      var output = document.getElementById('output');
+      output.src = URL.createObjectURL(fileInput.files[0]);
+      output.onload = function() {
+        URL.revokeObjectURL(output.src); // free memory
+      }
+    }

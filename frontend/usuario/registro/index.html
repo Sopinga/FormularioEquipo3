@@ -39,6 +39,11 @@
         <input type="text" id="rut" name="rut">
         <span class="error" id="rutError"></span><br>
 
+        <label for="imagen">Imagen:</label>
+        <input type="file" id="miImagen" name="imagen" accept="image/*" onchange="validateFile()">
+        <span class="error" id="imagenError"></span><br>
+        <img id="output" width="200" />
+
         <button type="button" id="validateBtn">Ingresar</button>
         
     </form>
