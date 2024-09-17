@@ -10,7 +10,6 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/validations/idAlgorithm.ts",
-    "src/validations/rutAlgorithm.ts"
+    "src/tipos/fastify.ts"
   ]
 }

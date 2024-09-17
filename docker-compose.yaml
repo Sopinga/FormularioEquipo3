@@ -7,14 +7,14 @@ services:
       context: ./backend
     command: sh -c "npm install;npm run dev"
     ports:
-      - 3000
+      - 3000:3000
     volumes:
       - ./backend:/backend
     environment:
-      - PG_DATABASE=${DB_DATABASE}
-      - PG_USER=${DB_USERNAME}
-      - PG_PASSWORD=${DB_PASSWORD}
-      - PG_HOST=database
+      - PGDATABASE=${DB_DATABASE}
+      - PGUSER=${DB_USERNAME}
+      - PGPASSWORD=${DB_PASSWORD}
+      - PGHOST=database
 
   frontend:
     image: nginx:alpine
