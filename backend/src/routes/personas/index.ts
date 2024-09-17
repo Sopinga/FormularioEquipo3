@@ -20,6 +20,7 @@ const personaRoute: FastifyPluginAsync = async (
       const res = await query(`SELECT
         id,
         nombre,
+        nombre2,
         apellido,
         email,
         cedula,
@@ -47,6 +48,7 @@ const personaRoute: FastifyPluginAsync = async (
             (nombre, apellido, email, cedula, rut, contrasena)
             VALUES
             ('${personaPost.nombre}', 
+            '${personaPost.nombre2}', 
             '${personaPost.apellido}', 
             '${personaPost.email}', 
             '${personaPost.cedula}', 
@@ -133,6 +135,7 @@ const personaRoute: FastifyPluginAsync = async (
       const personaPut = request.body as PersonaPutType;
       const res = await query(`UPDATE personas
         SET nombre = '${personaPut.nombre}',
+        nombre2 = '${personaPut.nombre2}',
         apellido = '${personaPut.apellido}',
         email = '${personaPut.email}',
         cedula = '${personaPut.cedula}',
@@ -159,6 +162,7 @@ const personaRoute: FastifyPluginAsync = async (
           properties: {
             id: { type: "string" },
             nombre: { type: "string" },
+            nombre2: { type: "string" },
             apellido: { type: "string" },
             email: { type: "string" },
             cedula: { type: "string" },
@@ -180,6 +184,7 @@ const personaRoute: FastifyPluginAsync = async (
       const res = await query(`SELECT 
         id,
         nombre,
+        nombre2,
         apellido,
         email,
         cedula,
