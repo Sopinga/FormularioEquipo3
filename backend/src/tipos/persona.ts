@@ -12,7 +12,7 @@ const rutRegex = /^\d{12}$/;
 export const PersonaSchema = Type.Object({
   id: Type.Number(),
   nombre: Type.String({ minLength: 2, maxLength: 50 }),
-  lapellido: Type.String({ minLength: 2, maxLength: 50 }),
+  apellido: Type.String({ minLength: 2, maxLength: 50 }),
   email: Type.String({ type: 'string', format: 'email' }),
   cedula: Type.String({ pattern: cedulaRegex.source }),
   rut: Type.String({ pattern: rutRegex.source }),
