@@ -1,7 +1,11 @@
 import oauthPlugin, { FastifyOAuth2Options } from '@fastify/oauth2';
 import fp from 'fastify-plugin';
+import 'dotenv/config';
+
 
 export default fp(async (fastify) => {
+    console.log("Google Client ID:", process.env.GOOGLE_CLIENT_ID);
+
     const googleOAuth20ptions: FastifyOAuth2Options = {
         name: 'googleOAuth2',
         scope: ['profile', 'email'],
@@ -13,7 +17,7 @@ export default fp(async (fastify) => {
             auth: oauthPlugin.fastifyOauth2.GOOGLE_CONFIGURATION,
         },
         startRedirectPath: '/auth/login/google',
-        callbackUri: `https://localhost/frontend/backend/auth/login/google/callback`,
+        callbackUri: `https://localhost/backend/auth/login/google/callback`,
         callbackUriParams: {
 
             access_type: 'offline',
@@ -21,5 +25,6 @@ export default fp(async (fastify) => {
         pkce: 'S256',
 
     };
+
     fastify.register(oauthPlugin.fastifyOauth2, googleOAuth20ptions);
 });
