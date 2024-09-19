@@ -1,5 +1,6 @@
 document.getElementById('validateBtn').addEventListener('click', async function () {
     const nombre = document.getElementById('nombre');
+    const nombre2 = document.getElementById('nombre2');
     const apellido = document.getElementById('apellido');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
@@ -8,6 +9,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     const rut = document.getElementById('rut');
 
     const nombreError = document.getElementById('nombreError');
+    const nombr2Error = document.getElementById('nombre2Error');
     const apellidoError = document.getElementById('apellidoError');
     const passwordError = document.getElementById('passwordError');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
@@ -33,6 +35,16 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         isValid = false;
     }
 
+    if (nombre2.value.trim() === '') {
+        nombre2Error.textContent = 'El nombre es obligatorio.';
+        nombre2Error.style.display = 'block';
+        isValid = false;
+    }
+    if (nombre2.value.length < 2 || nombre2.value.length > 50) {
+        nombre2Error.textContent = 'El nombre es demasiado corto o largo.';
+        nombre2Error.style.display = 'block';
+        isValid = false;
+    }
     if (apellido.value.trim() === '') {
         apellidoError.textContent = 'El apellido es obligatorio.';
         apellidoError.style.display = 'block';
@@ -142,6 +154,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     if (isValid) {
         const nuevaPersona = {
             nombre: nombre.value,
+            nombre2: nombre2.value,
             apellido: apellido.value,
             email: email.value,
             contrasena: password.value,
@@ -151,7 +164,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
 
         };
         try {
-            const responseAlta = await fetch('http://localhost/backend/personas', {
+            const responseAlta = await fetch('https://localhost/backend/personas', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -238,4 +251,3 @@ function validarRutUruguayo(rut) {
     console.log("El rut no cumple con el patron.")
     return false;
 }
-

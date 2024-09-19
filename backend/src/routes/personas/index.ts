@@ -45,7 +45,7 @@ const personaRoute: FastifyPluginAsync = async (
     handler: async function (request, reply) {
       const personaPost = request.body as PersonaPostType;
       const res = await query(`INSERT INTO personas
-            (nombre, apellido, email, cedula, rut, contrasena)
+            (nombre, nombre2, apellido, email, cedula, rut, contrasena)
             VALUES
             ('${personaPost.nombre}', 
             '${personaPost.nombre2}', 
@@ -113,6 +113,7 @@ const personaRoute: FastifyPluginAsync = async (
           properties: {
             id: { type: "string" },
             nombre: { type: "string" },
+            nombre2: { type: "string" },
             apellido: { type: "string" },
             email: { type: "string" },
             cedula: { type: "string" },

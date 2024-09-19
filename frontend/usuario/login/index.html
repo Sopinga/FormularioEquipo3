@@ -1,5 +1,6 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -7,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
     <form>
         <h3>Inicio de Sesion</h3>
@@ -17,11 +19,12 @@
         <label for="password">Contraseña</label>
         <input type="password" placeholder="Ingresa contraseña" id="password">
 
-        <button>Ingresar</button>
+        <button id="btnLogin">Ingresar</button>
+        <span class="error" id="error"></span>
         <div class="social">
-          <div class="go"><i class="fab fa-google"></i>  Google</div>
+            <a href="http://localhost/auth/login/google" class="go"><i class="fab fa-google"></i> Google</a>
         </div>
     </form>
 </body>
-</html>
 
+</html>
