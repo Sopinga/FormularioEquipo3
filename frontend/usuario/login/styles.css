@@ -7,10 +7,13 @@
 }
 
 body {
-    background-image: url(s://www.pixel4k.com/wp-content/uploads/2020/01/dark-minimal-scenery_1580055012-2048x1117.jpg);
+    background-image: url(https://www.pixel4k.com/wp-content/uploads/2020/01/dark-minimal-scenery_1580055012-2048x1117.jpg);
+
     background-size: cover;
     background-position: center;
 }
+
+
 
 .background {
     width: 430px;
@@ -46,7 +49,7 @@ form {
 
 form * {
     font-family: 'Poppins', sans-serif;
-    color: #ffffff;
+    color: #e2e1e1;
     letter-spacing: 0.5px;
     outline: none;
     border: none;
@@ -80,7 +83,7 @@ input {
 }
 
 ::placeholder {
-    color: #e5e5e5;
+    color: #e7e0e0;
 }
 
 button {

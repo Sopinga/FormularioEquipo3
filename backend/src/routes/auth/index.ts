@@ -33,7 +33,7 @@ const auth: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
             // Genera el token JWT
             const token = fastify.jwt.sign({ id: user.id });
-            reply.code(200).send({ token });
+            reply.send({ success: true, token, id: user.id });
         }
     });
 };

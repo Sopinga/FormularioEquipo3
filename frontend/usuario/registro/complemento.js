@@ -1,3 +1,52 @@
+
+function getUserDataFromURL() {
+    // Obtener los parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Extraer los valores de los parámetros
+    const email = urlParams.get('email');
+    const nombre2 = urlParams.get('given_name');
+    const apellido = urlParams.get('family_name');
+
+    // Si no hay token o usuario en la URL, mostrar un error
+    if (!email || !nombre2 || !apellido) {
+        console.error('No se ha encontrado los datos esperados en la URL');
+        return null;
+    }
+
+    try {
+        // Convertir el usuario de string a objeto 
+        const user = JSON.parse(decodeURIComponent(nombre2));
+
+        // Retornar el token y el objeto del usuario
+        return { token: email, user };
+    } catch (error) {
+        console.error('Error parsing user data from URL', error);
+        return null;
+    }
+}
+
+
+// Ejecutar la función cuando la página se cargue
+window.addEventListener('DOMContentLoaded', () => {
+    // Obtener la información del usuario desde la URL
+    const userData = getUserDataFromURL();
+
+    if (!userData || !userData.user) {
+        console.error('No valid user data found');
+        return;
+    }
+
+    const user = userData.user;
+
+    // Rellenar los campos con la información del usuario
+    nombre.value = user.name || '';
+    apellido.value = user.lastname || '';
+    emailField.value = user.email || '';
+}
+);
+
+
 document.getElementById('validateBtn').addEventListener('click', async function () {
     const nombre = document.getElementById('nombre');
     const nombre2 = document.getElementById('nombre2');

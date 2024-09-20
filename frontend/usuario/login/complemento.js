@@ -1,5 +1,7 @@
 // Función para verificar la contraseña y el email en el backend
-async function login(email, password) {
+document.getElementById('btonLogin').addEventListener('click', async function (email, password) {
+    const email = document.getElementById('mail').value;
+    const password = document.getElementById('password').value;
     try {
         const response = await fetch(`https://localhost/backend/auth/login`, {
             method: 'POST',
@@ -14,54 +16,19 @@ async function login(email, password) {
         }
 
         const data = await response.json();
-        localStorage.setItem('token', data.token);
-        return data.token;
+        this.token = data.token;
+        this.user = data.user;
+        this.id = data.id;
+
+        localStorage.setItem('token', this.token);
+        localStorage.setItem('user', JSON.stringify(this.user));
+        localStorage.setItem('id', this.id);
+        window.location.href = '../../listado/verTodos/index.html';
+        return this.user;
     } catch (error) {
         console.error('Error during login:', error);
         throw error;
     }
-}
-
-// Función para peticiones autenticadas
-async function authenticatedFetch(url, options = {}) {
-    // Obtengo el token del usuario
-    const token = localStorage.getItem('token');
-    if (!token) {
-        // Si no es válido, lanza un error
-        throw new Error('No se encontró un token autorizado');
-    }
-
-    // Añade el token al header
-    const defaultOptions = {
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        },
-    };
-
-    const mergedOptions = {
-        ...defaultOptions,
-        ...options,
-        headers: {
-            ...defaultOptions.headers,
-            ...options.headers,
-        },
-    };
-
-    return fetch(url, mergedOptions);
-}
-
-// Manejador del evento submit del formulario
-document.querySelector('form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        await login(username, password);
-        document.getElementById('error').textContent = 'Login realizado exitosamente.';
-        window.location.href = '../verTodos/index.html'; // Cambia la ruta si es necesario
-    } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('error').textContent = 'Tus datos no coinciden, intenta nuevamente';
-    }
 });
+
+

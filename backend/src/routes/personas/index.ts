@@ -201,38 +201,6 @@ const personaRoute: FastifyPluginAsync = async (
     }
   });
 
-  fastify.post("/login", {
-    schema: {
-      body: {
-        type: "object",
-        properties: {
-          email: { type: "string" },
-          password: { type: "string" }
-        },
-        required: ["email", "password"]
-      }
-    },
-    handler: async function (request, reply) {
-      const { email, password } = request.body as { email: string, password: string };
-
-      // Busca el usuario en la base de datos
-      const res = await query(`SELECT * FROM personas WHERE email = '${email}' AND contrasena = '${password}';`);
-
-      if (res.rows.length === 0) {
-        return reply.code(401).send({ message: "Credenciales inválidas" });
-      }
-
-      const user = res.rows[0];
-
-      // Genera el token JWT
-      const token = fastify.jwt.sign({ id: user.id, email: user.email });
-
-      // Envía el token al cliente
-      reply.send({ token });
-    }
-  });
-
-
 };
 
 export default personaRoute;

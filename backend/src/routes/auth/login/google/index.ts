@@ -22,16 +22,21 @@ const googleRoutes: FastifyPluginAsync = async (
             const parsedUserinfo = JSON.parse(JSON.stringify(userinfo));
 
             const email = parsedUserinfo.email;
-
+            const given_name = parsedUserinfo.given_name;
+            const family_name = parsedUserinfo.family_name
+            console.log("se obtuvieron los datos", email, given_name, family_name)
             // Verifica si el correo electrónico existe en la base de datos
             const res = await query(`SELECT id, email FROM personas WHERE email = '${email}'`);
-
+            // en caso de que la persona no exista en la base de datos, se pasan los datos en la url
             if (res.rows.length === 0) {
-                return reply.code(404).send({ error: 'User not found' });
+                reply.redirect(`https://localhost/form/index.html?email=${email}&given_name=${given_name}&family_name=${family_name}`);
+                return;
             }
 
-            // Redirige al usuario a la página de listado después del login con Google
-            reply.redirect('https://localhost/listado/verTodo/index.html');
+            const user = res.rows[0];
+            const token = fastify.jwt.sign({ id: user.id });
+            reply.redirect(`https://localhost/login?token=${token}&user=${user}`)
+
         } catch (error) {
             console.error('Error al obtener el token de acceso:', error);
             reply.status(500).send({ error: 'Error al procesar la autenticación' });

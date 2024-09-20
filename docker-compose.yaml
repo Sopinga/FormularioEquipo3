@@ -20,6 +20,7 @@ services:
 
   frontend:
     image: nginx:alpine
+    container_name: frontend
     volumes:
       - ./frontend:/usr/share/nginx/html
     environment:
