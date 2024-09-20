@@ -50,6 +50,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     const email = document.getElementById('email');
     const cedula = document.getElementById('cedula');
     const rut = document.getElementById('rut');
+    const imagen = document.getElementById('miImagen');
 
     const nombreError = document.getElementById('nombreError');
     const nombr2Error = document.getElementById('nombre2Error');
@@ -59,6 +60,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     const emailError = document.getElementById('emailError');
     const cedulaError = document.getElementById('cedulaError');
     const rutError = document.getElementById('rutError');
+    const imagenError = document.getElementById('imagenError'); 
 
     // Reset errors
     const errorElements = document.querySelectorAll('.error');
@@ -168,6 +170,12 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         isValid = false;
     }
 
+    if (imagen.value.trim() === '') {
+        imagenError.textContent = 'La imagen es obligatoria.';
+        imagenError.style.display = 'block';
+        isValid = false;
+    }
+
     const cedulaPattern = /^\d{1}\.\d{3}\.\d{3}-\d{1}$/;
     if (cedula.value.trim() === '') {
         cedulaError.textContent = 'La cédula es obligatoria.';
@@ -203,6 +211,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             contrasena: password.value,
             cedula: cedula.value,
             rut: rut.value,
+            imagen: imagen.value
 
 
         };
@@ -294,3 +303,30 @@ function validarRutUruguayo(rut) {
     console.log("El rut no cumple con el patron.")
     return false;
 }
+
+    function validateFile() {
+      var fileInput = document.getElementById('miImagen');
+      var filePath = fileInput.value;
+      var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+      var output = document.getElementById('output');
+  
+      if (!allowedExtensions.exec(filePath)) {
+        imagenError.textContent = 'El archivo seleccionado no es una imagen.';
+        imagenError.style.display = 'block';
+        isValid = false;
+        fileInput.value = '';
+        output.src = '';
+        return false;
+      } else {
+        imagenError.textContent = '';
+        mostrarImagen(fileInput);
+      }
+    }
+  
+    function mostrarImagen(fileInput) {
+      var output = document.getElementById('output');
+      output.src = URL.createObjectURL(fileInput.files[0]);
+      output.onload = function() {
+        URL.revokeObjectURL(output.src); // free memory
+      }
+    }

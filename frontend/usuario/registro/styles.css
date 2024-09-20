@@ -49,6 +49,7 @@ form{
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
     margin-bottom: 100px;
+    margin-top: 200px;
 }
 form *{
     font-family: 'Poppins',sans-serif;
@@ -104,4 +105,10 @@ button{
 
 span {
     color: red;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
