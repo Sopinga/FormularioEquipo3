@@ -12,32 +12,35 @@ const rutRegex = /^\d{12}$/;
 export const PersonaSchema = Type.Object({
   id: Type.Number(),
   nombre: Type.String({ minLength: 2, maxLength: 50 }),
-  nombre2: Type.String({ minLength: 2, maxLength: 50 }),
+  nombre2: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
   apellido: Type.String({ minLength: 2, maxLength: 50 }),
   email: Type.String({ type: 'string', format: 'email' }),
   cedula: Type.String({ pattern: cedulaRegex.source }),
   rut: Type.String({ pattern: rutRegex.source }),
+  imagen: Type.String({}),
 });
 
 export const PersonaPostSchema = Type.Object({
   contrasena: Type.String({ minLength: 8, maxLength: 20, pattern: passwordRegex.source, }),
   cedula: Type.String({ pattern: cedulaRegex.source, }),
   nombre: Type.String({ minLength: 2, maxLength: 50 }),
-  nombre2: Type.String({ minLength: 2, maxLength: 50 }),
+  nombre2: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
   apellido: Type.String({ minLength: 2, maxLength: 50 }),
   email: Type.String({ type: 'string', format: 'email' }),
   rut: Type.String({ pattern: rutRegex.source }),
+  imagen: Type.String({}),
 
 });
 
 export const PersonaPutSchema = Type.Object({
   nombre: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
-  nombre2: Type.String({ minLength: 2, maxLength: 50 }),
+  nombre2: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
   apellido: Type.Optional(Type.String({ minLength: 2, maxLength: 50 })),
   email: Type.Optional(Type.String({ type: 'string', format: 'email' })),
   cedula: Type.Optional(Type.String({ pattern: cedulaRegex.source })),
   rut: Type.Optional(Type.String({ pattern: rutRegex.source })),
   contrasena: Type.Optional(Type.String()),
+  imagen: Type.Optional(Type.String({})),
 });
 
 

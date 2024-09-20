@@ -1,5 +1,49 @@
+function getUserDataFromURL() {
+    // Obtener los parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Extraer los valores de los parámetros
+    const email = urlParams.get('email');
+    const nombre2 = urlParams.get('given_name');
+    const apellido = urlParams.get('family_name');
+
+    // Si no hay datos en la URL, mostrar un error
+    if (!email || !nombre2 || !apellido) {
+        console.error('No se han encontrado los datos esperados en la URL');
+        return null;
+    }
+
+    // Retornar los datos extraídos directamente
+    return { email, nombre2, apellido };
+}
+
+// Ejecutar la función cuando la página se cargue
+window.addEventListener('DOMContentLoaded', () => {
+    // Obtener la información del usuario desde la URL
+    const userData = getUserDataFromURL();
+
+    if (!userData) {
+        console.error('No valid user data found');
+        return;
+    }
+
+    // Rellenar los campos con la información del usuario
+    nombre.value = userData.nombre2 || '';
+    email.value = userData.email || '';
+    //hay cuentas que no tienen apellido
+    if (!apellido.value === "undefined") {
+        apellido.value = userData.apellido || '';
+    } else {
+        console.log("Tu cuenta no tiene un apellido registrado")
+    }
+
+});
+
+
+
 document.getElementById('validateBtn').addEventListener('click', async function () {
     const nombre = document.getElementById('nombre');
+    const nombre2 = document.getElementById('nombre2');
     const apellido = document.getElementById('apellido');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
@@ -9,6 +53,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     const imagen = document.getElementById('miImagen');
 
     const nombreError = document.getElementById('nombreError');
+    const nombr2Error = document.getElementById('nombre2Error');
     const apellidoError = document.getElementById('apellidoError');
     const passwordError = document.getElementById('passwordError');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
@@ -35,6 +80,16 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         isValid = false;
     }
 
+    if (nombre2.value.trim() === '') {
+        nombre2Error.textContent = 'El nombre es obligatorio.';
+        nombre2Error.style.display = 'block';
+        isValid = false;
+    }
+    if (nombre2.value.length < 2 || nombre2.value.length > 50) {
+        nombre2Error.textContent = 'El nombre es demasiado corto o largo.';
+        nombre2Error.style.display = 'block';
+        isValid = false;
+    }
     if (apellido.value.trim() === '') {
         apellidoError.textContent = 'El apellido es obligatorio.';
         apellidoError.style.display = 'block';
@@ -150,6 +205,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     if (isValid) {
         const nuevaPersona = {
             nombre: nombre.value,
+            nombre2: nombre2.value,
             apellido: apellido.value,
             email: email.value,
             contrasena: password.value,
@@ -160,7 +216,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
 
         };
         try {
-            const responseAlta = await fetch('http://localhost/backend/personas', {
+            const responseAlta = await fetch('https://localhost/backend/personas', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

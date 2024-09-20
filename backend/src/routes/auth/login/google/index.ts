@@ -1,19 +1,7 @@
 import type { FastifyInstance, FastifyPluginAsync, FastifyRequest, FastifyReply } from 'fastify';
 import type { AppOptions } from './../../../../app.ts';
 import { query } from "./../../../../services/database.js";
-import got from 'got';
-import { PersonaType } from '../../../../tipos/persona.js';
 
-interface GoogleUser {
-    id: string;
-    email: string;
-    verified_email: boolean;
-    name: string;
-    given_name: string;
-    family_name: string;
-    picture: string;
-    locale: string;
-}
 
 const googleRoutes: FastifyPluginAsync = async (
     fastify: FastifyInstance,
@@ -22,37 +10,37 @@ const googleRoutes: FastifyPluginAsync = async (
 
     fastify.get('/callback', async function (request: FastifyRequest, reply: FastifyReply) {
         console.log("Obteniendo token");
+        try {
+            // Obtiene el token de Google OAuth2
+            const googletoken = await fastify.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(request);
 
-        // Obtiene el token de Google OAuth2
-        const { token: googleToken } = await fastify.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(request);
+            console.log({ googletoken });
 
-        console.log({ googleToken });
+            const userinfo = await fastify.googleOAuth2.userinfo(googletoken.token.access_token);
 
-        // Obtiene la información con el token que recibimos
-        const userInfo: GoogleUser = await got
-            .get('https://www.googleapis.com/oauth2/v2/userinfo', {
-                headers: {
-                    Authorization: `Bearer ${googleToken.access_token}`,
-                },
-            })
-            .json();
-        console.log({ userInfo });
+            // Convertir la respuesta en un string y luego en un objeto para manejar los datos
+            const parsedUserinfo = JSON.parse(JSON.stringify(userinfo));
 
-        // Verifica si el correo electrónico existe en la base de datos
-        const res = await query('SELECT * FROM personas WHERE email=$1', [userInfo.email]);
+            const email = parsedUserinfo.email;
+            const given_name = parsedUserinfo.given_name;
+            const family_name = parsedUserinfo.family_name
+            console.log("se obtuvieron los datos", email, given_name, family_name)
+            // Verifica si el correo electrónico existe en la base de datos
+            const res = await query(`SELECT id, email FROM personas WHERE email = '${email}'`);
+            // en caso de que la persona no exista en la base de datos, se pasan los datos en la url
+            if (res.rows.length === 0) {
+                reply.redirect(`https://localhost/usuario/registro/index.html?email=${email}&given_name=${given_name}&family_name=${family_name}`);
+                return;
+            }
 
-        if (res.rows.length === 0) {
-            return reply.code(404).send({ error: 'User not found' });
+            const user = res.rows[0];
+            const token = fastify.jwt.sign({ id: user.id });
+            reply.redirect(`https://localhost/login?token=${token}&user=${user}`)
+
+        } catch (error) {
+            console.error('Error al obtener el token de acceso:', error);
+            reply.status(500).send({ error: 'Error al procesar la autenticación' });
         }
-        const persona: PersonaType = res.rows[0];
-        const payload = {
-            id: persona.id,
-            email: persona.email,
-            roles: ["admin", "user"],
-        };
-        const token = fastify.jwt.sign(payload);
-        const url = `${process.env.FRONTEND_URL}/index.html?token=${token}`;
-        return reply.redirect(url);
     });
 };
 

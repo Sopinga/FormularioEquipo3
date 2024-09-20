@@ -13,8 +13,8 @@ if (idPersona) {
 
 async function getPerson(idPersona) {
     try {
-        console.log('Haciendo fetch a:', `http://localhost/backend/personas/${idPersona}`);
-        const response = await fetch(`http://localhost/backend/personas/${idPersona}`);
+        console.log('Haciendo fetch a:', `https://localhost/backend/personas/${idPersona}`);
+        const response = await fetch(`https://localhost/backend/personas/${idPersona}`);
 
         if (response.ok) {
             const persona = await response.json();
