@@ -29,7 +29,7 @@ const googleRoutes: FastifyPluginAsync = async (
             const res = await query(`SELECT id, email FROM personas WHERE email = '${email}'`);
             // en caso de que la persona no exista en la base de datos, se pasan los datos en la url
             if (res.rows.length === 0) {
-                reply.redirect(`https://localhost/form/index.html?email=${email}&given_name=${given_name}&family_name=${family_name}`);
+                reply.redirect(`https://localhost/usuario/registro/index.html?email=${email}&given_name=${given_name}&family_name=${family_name}`);
                 return;
             }
 

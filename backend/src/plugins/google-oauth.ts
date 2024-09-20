@@ -13,7 +13,6 @@ export default fp(async (fastify) => {
                 id: process.env.GOOGLE_CLIENT_ID || '',
                 secret: process.env.GOOGLE_CLIENT_SECRET || '',
             },
-            auth: oauthPlugin.fastifyOauth2.GOOGLE_CONFIGURATION,
         },
         startRedirectPath: '/auth/login/google',
         callbackUri: `https://localhost/backend/auth/login/google/callback`,
@@ -21,6 +20,9 @@ export default fp(async (fastify) => {
             access_type: 'offline',
         },
         pkce: 'S256',
+        discovery: {
+            issuer: 'https://accounts.google.com'
+        },
     };
 
     fastify.register(oauthPlugin.fastifyOauth2, googleOAuth20ptions);
