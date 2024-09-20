@@ -3,3 +3,4 @@ proxy/certs
 package-lock.json
 package.json
 node_modules
+database/init.sql
