@@ -6,6 +6,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     const email = document.getElementById('email');
     const cedula = document.getElementById('cedula');
     const rut = document.getElementById('rut');
+    const imagen = document.getElementById('miImagen');
 
     const nombreError = document.getElementById('nombreError');
     const apellidoError = document.getElementById('apellidoError');
@@ -14,6 +15,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
     const emailError = document.getElementById('emailError');
     const cedulaError = document.getElementById('cedulaError');
     const rutError = document.getElementById('rutError');
+    const imagenError = document.getElementById('imagenError'); 
 
     // Reset errors
     const errorElements = document.querySelectorAll('.error');
@@ -113,6 +115,12 @@ document.getElementById('validateBtn').addEventListener('click', async function 
         isValid = false;
     }
 
+    if (imagen.value.trim() === '') {
+        imagenError.textContent = 'La imagen es obligatoria.';
+        imagenError.style.display = 'block';
+        isValid = false;
+    }
+
     const cedulaPattern = /^\d{1}\.\d{3}\.\d{3}-\d{1}$/;
     if (cedula.value.trim() === '') {
         cedulaError.textContent = 'La cédula es obligatoria.';
@@ -147,6 +155,7 @@ document.getElementById('validateBtn').addEventListener('click', async function 
             contrasena: password.value,
             cedula: cedula.value,
             rut: rut.value,
+            imagen: imagen.value
 
 
         };
