@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const cardContainer = document.getElementById("card-container");
 
-    console.log('Haciendo fetch a:', `http://localhost/backend/personas`);
-    const response = await fetch(`http://localhost/backend/personas`);// aca falla
+    console.log('Haciendo fetch a:', `https://localhost/backend/personas`);
+    const response = await fetch(`https://localhost/backend/personas`);// aca falla
     const data = await response.json();
     console.log('Datos recibidos:', data);
     data.forEach(persona => {
@@ -47,7 +47,7 @@ async function DeletePerson(id) {
     }
 
     try {
-        const response = await fetch(`http://localhost/backend/personas/${id}`, {
+        const response = await fetch(`https://localhost/backend/personas/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

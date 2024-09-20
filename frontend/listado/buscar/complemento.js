@@ -2,8 +2,8 @@
 async function getPerson(idPersona) {
     const cardContainer = document.getElementById("card-container");
 
-    console.log('Haciendo fetch a:', `http://localhost/backend/personas/${idPersona}`);
-    const response = await fetch(`http://localhost/backend/personas/${idPersona}`);/*cambiar ese ; por , {
+    console.log('Haciendo fetch a:', `https://localhost/backend/personas/${idPersona}`);
+    const response = await fetch(`https://localhost/backend/personas/${idPersona}`);/*cambiar ese ; por , {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`, // Añadir el token en el encabezado Authorization
@@ -58,7 +58,7 @@ async function DeletePerson(id) {
     }
 
     try {
-        const response = await fetch(`http://localhost/backend/personas/${id}`, {
+        const response = await fetch(`https://localhost/backend/personas/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

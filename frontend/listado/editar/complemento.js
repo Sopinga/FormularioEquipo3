@@ -13,6 +13,7 @@ const confirmBtn = document.getElementById("ConfirmBtn");
 
 document.getElementById('ConfirmBtn').addEventListener('click', async function () {
     const nombre = document.getElementById('nuevoNombre');
+    const nombre2 = document.getElementById('nuevoNombre2');
     const apellido = document.getElementById('nuevoApellido');
     const password = document.getElementById('nuevaContrasena');
     const confirmPassword = document.getElementById('confirmarNuevaContrasena');
@@ -21,6 +22,7 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
     const rut = document.getElementById('nuevoRut');
 
     const nombreError = document.getElementById('nombreError');
+    const nombre2Error = document.getElementById('nombre2Error');
     const apellidoError = document.getElementById('apellidoError');
     const passwordError = document.getElementById('passwordError');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
@@ -43,6 +45,16 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
     if (nombre.value.length < 2 || nombre.value.length > 50) {
         nombreError.textContent = 'El nombre es demasiado corto o largo.';
         nombreError.style.display = 'block';
+        isValid = false;
+    }
+    if (nombre2.value.trim() === '') {
+        nombre2Error.textContent = 'El nombre es obligatorio.';
+        nombre2Error.style.display = 'block';
+        isValid = false;
+    }
+    if (nombre2.value.length < 2 || nombre2.value.length > 50) {
+        nombre2Error.textContent = 'El nombre es demasiado corto o largo.';
+        nombre2Error.style.display = 'block';
         isValid = false;
     }
 
@@ -164,7 +176,7 @@ document.getElementById('ConfirmBtn').addEventListener('click', async function (
 
         };
         console.log("aprobo los campos, ", idPersona)
-        const responseAlta = await fetch(`http://localhost/backend/personas/${idPersona}`, {
+        const responseAlta = await fetch(`https://localhost/backend/personas/${idPersona}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'

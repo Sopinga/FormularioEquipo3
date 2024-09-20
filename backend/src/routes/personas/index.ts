@@ -24,7 +24,8 @@ const personaRoute: FastifyPluginAsync = async (
         apellido,
         email,
         cedula,
-        rut
+        rut,
+        imagen
         FROM personas`);
       if (res.rows.length === 0) {
         reply.code(404).send({ message: "No hay personas registradas" });
@@ -45,7 +46,7 @@ const personaRoute: FastifyPluginAsync = async (
     handler: async function (request, reply) {
       const personaPost = request.body as PersonaPostType;
       const res = await query(`INSERT INTO personas
-            (nombre, apellido, email, cedula, rut, contrasena)
+            (nombre, nombre2, apellido, email, cedula, rut, contrasena)
             VALUES
             ('${personaPost.nombre}', 
             '${personaPost.nombre2}', 
@@ -53,7 +54,8 @@ const personaRoute: FastifyPluginAsync = async (
             '${personaPost.email}', 
             '${personaPost.cedula}', 
             '${personaPost.rut}', 
-            '${personaPost.contrasena}')
+            '${personaPost.contrasena}',
+            '${personaPost.imagen}')
             RETURNING id;`);
       const id = res.rows[0].id;
       if (res.rows.length === 0) {
@@ -113,10 +115,12 @@ const personaRoute: FastifyPluginAsync = async (
           properties: {
             id: { type: "string" },
             nombre: { type: "string" },
+            nombre2: { type: "string" },
             apellido: { type: "string" },
             email: { type: "string" },
             cedula: { type: "string" },
-            rut: { type: "string" }
+            rut: { type: "string" },
+            imagen: { type: "string" }
           }
         },
         404: {
@@ -139,7 +143,8 @@ const personaRoute: FastifyPluginAsync = async (
         apellido = '${personaPut.apellido}',
         email = '${personaPut.email}',
         cedula = '${personaPut.cedula}',
-        rut = '${personaPut.rut}'
+        rut = '${personaPut.rut}',
+        imagen = '${personaPut.imagen}'
         WHERE id = ${id}
         RETURNING id;`);
       if (res.rows.length === 0) {
@@ -166,7 +171,8 @@ const personaRoute: FastifyPluginAsync = async (
             apellido: { type: "string" },
             email: { type: "string" },
             cedula: { type: "string" },
-            rut: { type: "string" }
+            rut: { type: "string" },
+            imagen: { type: "string" }
           }
         },
         404: {
@@ -188,7 +194,8 @@ const personaRoute: FastifyPluginAsync = async (
         apellido,
         email,
         cedula,
-        rut
+        rut,
+        imagen
         FROM personas WHERE id = ${id};`);
 
       if (res.rows.length === 0) {
@@ -199,38 +206,6 @@ const personaRoute: FastifyPluginAsync = async (
       return persona;
     }
   });
-
-  fastify.post("/login", {
-    schema: {
-      body: {
-        type: "object",
-        properties: {
-          email: { type: "string" },
-          password: { type: "string" }
-        },
-        required: ["email", "password"]
-      }
-    },
-    handler: async function (request, reply) {
-      const { email, password } = request.body as { email: string, password: string };
-
-      // Busca el usuario en la base de datos
-      const res = await query(`SELECT * FROM personas WHERE email = '${email}' AND contrasena = '${password}';`);
-
-      if (res.rows.length === 0) {
-        return reply.code(401).send({ message: "Credenciales inválidas" });
-      }
-
-      const user = res.rows[0];
-
-      // Genera el token JWT
-      const token = fastify.jwt.sign({ id: user.id, email: user.email });
-
-      // Envía el token al cliente
-      reply.send({ token });
-    }
-  });
-
 
 };
 
