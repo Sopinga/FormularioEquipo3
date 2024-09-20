@@ -17,6 +17,7 @@ export const PersonaSchema = Type.Object({
   email: Type.String({ type: 'string', format: 'email' }),
   cedula: Type.String({ pattern: cedulaRegex.source }),
   rut: Type.String({ pattern: rutRegex.source }),
+  imagen: Type.String({}),
 });
 
 export const PersonaPostSchema = Type.Object({
@@ -27,6 +28,7 @@ export const PersonaPostSchema = Type.Object({
   apellido: Type.String({ minLength: 2, maxLength: 50 }),
   email: Type.String({ type: 'string', format: 'email' }),
   rut: Type.String({ pattern: rutRegex.source }),
+  imagen: Type.String({}),
 
 });
 
@@ -38,6 +40,7 @@ export const PersonaPutSchema = Type.Object({
   cedula: Type.Optional(Type.String({ pattern: cedulaRegex.source })),
   rut: Type.Optional(Type.String({ pattern: rutRegex.source })),
   contrasena: Type.Optional(Type.String()),
+  imagen: Type.Optional(Type.String({})),
 });
 
 

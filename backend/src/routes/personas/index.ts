@@ -24,7 +24,8 @@ const personaRoute: FastifyPluginAsync = async (
         apellido,
         email,
         cedula,
-        rut
+        rut,
+        imagen
         FROM personas`);
       if (res.rows.length === 0) {
         reply.code(404).send({ message: "No hay personas registradas" });
@@ -53,7 +54,8 @@ const personaRoute: FastifyPluginAsync = async (
             '${personaPost.email}', 
             '${personaPost.cedula}', 
             '${personaPost.rut}', 
-            '${personaPost.contrasena}')
+            '${personaPost.contrasena}',
+            '${personaPost.imagen}')
             RETURNING id;`);
       const id = res.rows[0].id;
       if (res.rows.length === 0) {
@@ -117,7 +119,8 @@ const personaRoute: FastifyPluginAsync = async (
             apellido: { type: "string" },
             email: { type: "string" },
             cedula: { type: "string" },
-            rut: { type: "string" }
+            rut: { type: "string" },
+            imagen: { type: "string" }
           }
         },
         404: {
@@ -140,7 +143,8 @@ const personaRoute: FastifyPluginAsync = async (
         apellido = '${personaPut.apellido}',
         email = '${personaPut.email}',
         cedula = '${personaPut.cedula}',
-        rut = '${personaPut.rut}'
+        rut = '${personaPut.rut}',
+        imagen = '${personaPut.imagen}'
         WHERE id = ${id}
         RETURNING id;`);
       if (res.rows.length === 0) {
@@ -167,7 +171,8 @@ const personaRoute: FastifyPluginAsync = async (
             apellido: { type: "string" },
             email: { type: "string" },
             cedula: { type: "string" },
-            rut: { type: "string" }
+            rut: { type: "string" },
+            imagen: { type: "string" }
           }
         },
         404: {
@@ -189,7 +194,8 @@ const personaRoute: FastifyPluginAsync = async (
         apellido,
         email,
         cedula,
-        rut
+        rut,
+        imagen
         FROM personas WHERE id = ${id};`);
 
       if (res.rows.length === 0) {
